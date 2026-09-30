@@ -1434,22 +1434,20 @@ html {
 }
 
 .tech-marquee-item {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.5rem 1.05rem;
-  border: 1px solid var(--ink-border);
-  border-radius: 9999px;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1.5px solid var(--ink-border);
+  border-radius: 14px;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.825rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  opacity: 0.88;
-  white-space: nowrap;
+  opacity: 0.9;
   user-select: none;
-  cursor: default;
+  cursor: pointer;
   transition: background-color 0.15s steps(2), color 0.15s steps(2), transform 0.15s steps(2), box-shadow 0.15s steps(2), opacity 0.15s steps(2);
 }
 
@@ -1457,17 +1455,57 @@ html {
   opacity: 1;
   background: var(--ink);
   color: var(--paper);
-  transform: translateY(-2px);
-  box-shadow: 2px 2px 0px var(--ink-border);
+  transform: translateY(-3px);
+  box-shadow: 3px 3px 0px var(--ink-border);
+}
+
+/* Tactile E-Ink Tooltip on Icon Hover */
+.tech-marquee-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink-border);
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.18);
+  z-index: 20;
+}
+
+.tech-marquee-item:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .tech-marquee-icon {
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
   display: inline-block;
   vertical-align: middle;
+  fill: currentColor;
 }
+
+.eink-svg-paper {
+  fill: var(--paper);
+  transition: fill 0.15s ease;
+}
+
+.tech-marquee-item:hover .eink-svg-paper {
+  fill: var(--ink);
+}
+
 
 
 

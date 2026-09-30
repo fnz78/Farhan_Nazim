@@ -279,4 +279,44 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // --- 7. E-Ink Tech Stack Marquee Populator ---
+  const marqueeTrack = document.querySelector('.eink-marquee-track');
+  if (marqueeTrack && window.TECH_STACK_ICONS) {
+    const techItems = [
+      { name: 'Python', icon: window.TECH_STACK_ICONS.python },
+      { name: 'NumPy', icon: window.TECH_STACK_ICONS.numpy },
+      { name: 'Pandas', icon: window.TECH_STACK_ICONS.pandas },
+      { name: 'OpenCV', icon: window.TECH_STACK_ICONS.opencv },
+      { name: 'HTML5', icon: window.TECH_STACK_ICONS.html5 },
+      { name: 'CSS3', icon: window.TECH_STACK_ICONS.css3 },
+      { name: 'JavaScript', icon: window.TECH_STACK_ICONS.javascript },
+      { name: 'TypeScript', icon: window.TECH_STACK_ICONS.typescript },
+      { name: 'React', icon: window.TECH_STACK_ICONS.react },
+      { name: 'Vite', icon: window.TECH_STACK_ICONS.vite },
+      { name: 'Tailwind CSS', icon: window.TECH_STACK_ICONS.tailwindcss },
+      { name: 'FastAPI', icon: window.TECH_STACK_ICONS.fastapi },
+      { name: 'Node.js', icon: window.TECH_STACK_ICONS.nodejs },
+      { name: 'npm', icon: window.TECH_STACK_ICONS.npm },
+      { name: 'C', icon: window.TECH_STACK_ICONS.c },
+      { name: 'Git', icon: window.TECH_STACK_ICONS.git },
+      { name: 'GitHub', icon: window.TECH_STACK_ICONS.github },
+      { name: 'Antigravity', icon: window.TECH_STACK_ICONS.antigravity },
+      { name: 'Jupyter', icon: window.TECH_STACK_ICONS.jupyter },
+      { name: 'Kaggle', icon: window.TECH_STACK_ICONS.kaggle },
+      { name: 'MySQL', icon: window.TECH_STACK_ICONS.mysql },
+      { name: 'SQLite', icon: window.TECH_STACK_ICONS.sqlite },
+      { name: 'REST API', icon: window.TECH_STACK_ICONS.restapi }
+    ];
+
+    const createSet = (items) => items.map(item => `
+      <div class="tech-marquee-item" data-tooltip="${item.name}" aria-label="${item.name}">
+        ${item.icon || ''}
+      </div>
+    `).join('');
+
+    const htmlContent = createSet(techItems);
+    marqueeTrack.innerHTML = htmlContent + htmlContent;
+  }
 });
+
