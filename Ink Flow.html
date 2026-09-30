@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ink</title>
+<style>
+:root{--paper:#dcdcd7;--ink:#1c1c1a;--grain:.10;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1d1d1b;--ink:#d8d8d2;--grain:.16}}
+:root[data-theme="dark"]{--paper:#1d1d1b;--ink:#d8d8d2;--grain:.16}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--paper);overscroll-behavior:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:var(--grain);mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+body.flash canvas{filter:invert(1);transition:none}
+body:not(.flash) canvas{transition:filter .35s steps(3,end)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+(function(){
+  var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+  var W,H,dpr,N=17,P=90,t=0,last=0;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ptr={x:-9999,y:-9999,sx:-9999,sy:-9999,on:false,power:0,kick:0};
+  var css=getComputedStyle(document.documentElement);
+  function col(){css=getComputedStyle(document.documentElement);}
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=innerWidth;H=innerHeight;
+    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle=css.getPropertyValue('--paper');ctx.fillRect(0,0,W,H);
+  }
+  addEventListener('resize',resize);resize();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){col();resize();});
+
+  function move(e){
+    var r=cv.getBoundingClientRect();
+    ptr.x=e.clientX-r.left;ptr.y=e.clientY-r.top;
+    if(ptr.sx<-999){ptr.sx=ptr.x;ptr.sy=ptr.y;}
+    ptr.on=true;
+  }
+  cv.addEventListener('pointermove',move);
+  cv.addEventListener('pointerdown',function(e){
+    move(e);ptr.kick=1;
+    document.body.classList.add('flash');
+    setTimeout(function(){document.body.classList.remove('flash');},110);
+  });
+  function leave(){ptr.on=false;}
+  cv.addEventListener('pointerup',function(e){if(e.pointerType!=='mouse')leave();});
+  cv.addEventListener('pointercancel',leave);
+  cv.addEventListener('pointerleave',leave);
+
+  function centre(u,tt,out){
+    // diagonal S sweep, bottom-left to top-right
+    var x=-0.05*W+u*1.1*W;
+    var base=H*(0.72-0.46*u);
+    var amp=H*0.09;
+    var y=base
+      +Math.sin(u*5.2+tt*0.35)*amp*(1-u*0.5)
+      +Math.sin(u*9.5-tt*0.22)*amp*0.28;
+    out[0]=x;out[1]=y;
+  }
+  var c=[0,0];
+  function frame(ts){
+    var dt=Math.min((ts-last)/1000||0.016,0.05);last=ts;
+    t+=dt*(reduce?0.15:1);
+    // smooth pointer + power
+    if(ptr.on){ptr.sx+=(ptr.x-ptr.sx)*Math.min(1,dt*9);ptr.sy+=(ptr.y-ptr.sy)*Math.min(1,dt*9);}
+    ptr.power+=((ptr.on?1:0)-ptr.power)*Math.min(1,dt*4);
+    ptr.kick*=Math.pow(0.02,dt);
+
+    // e-ink ghosting: partial fade instead of hard clear
+    ctx.globalAlpha=0.24;
+    ctx.fillStyle=css.getPropertyValue('--paper');
+    ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha=1;
+    ctx.strokeStyle=css.getPropertyValue('--ink');
+    ctx.lineCap='round';ctx.lineJoin='round';
+
+    var radius=Math.max(120,Math.min(W,H)*0.24);
+    var r2=radius*radius;
+    var pts=new Array(P+1);
+    for(var i=0;i<N;i++){
+      var k=i/(N-1)-0.5;
+      for(var j=0;j<=P;j++){
+        var u=j/P;
+        centre(u,t,c);
+        // ribbon spread pinches and swells along the length
+        var spread=H*(0.012+0.016*(0.5+0.5*Math.sin(u*6.0-t*0.3)))*(1+0.9*Math.sin(u*Math.PI));
+        var x=c[0]+k*spread*N*0.35;
+        var y=c[1]+k*spread*N*1.0+Math.sin(u*7+i*0.35+t*0.6)*H*0.006;
+        if(ptr.power>0.01){
+          var dx=x-ptr.sx,dy=y-ptr.sy,d2=dx*dx+dy*dy;
+          if(d2<r2*4){
+            var f=Math.exp(-d2/r2)*ptr.power;
+            var d=Math.sqrt(d2)||1;
+            var push=f*radius*(0.55+ptr.kick*0.9);
+            x+=dx/d*push;y+=dy/d*push;
+          }
+        }
+        pts[j]=[x,y];
+      }
+      ctx.beginPath();
+      ctx.moveTo(pts[0][0],pts[0][1]);
+      for(var m=1;m<P;m++){
+        var mx=(pts[m][0]+pts[m+1][0])/2,my=(pts[m][1]+pts[m+1][1])/2;
+        ctx.quadraticCurveTo(pts[m][0],pts[m][1],mx,my);
+      }
+      ctx.lineWidth=0.7+ (1-Math.abs(k)*2)*0.6 + ptr.power*0.3;
+      ctx.globalAlpha=0.35+0.55*(1-Math.abs(k)*1.6>0?1-Math.abs(k)*1.6:0.05);
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
