@@ -876,5 +876,522 @@ body:not(.flash) .eink-footer {
   }
 }
 
+/* ==========================================================================
+   E-Ink Hero Section Styles
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hero-section {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+  opacity: 0;
+  animation: heroFadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+@keyframes heroFadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Content Column */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 1. Small Professional Eyebrow/Label */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--paper-card);
+  border: 1.5px solid var(--ink-border);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  box-shadow: 2px 2px 0px var(--ink-border);
+}
+
+.eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--ink);
+  border-radius: 50%;
+  animation: eink-pulse 2s infinite steps(2);
+}
+
+.eyebrow-text {
+  color: var(--ink);
+}
+
+/* 2. My Name */
+.hero-title {
+  margin: 0 0 1rem 0;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.hero-name-primary {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.hero-name-secondary {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+/* 3. Professional Identity */
+.hero-identity-container {
+  margin-bottom: 1.25rem;
+}
+
+.hero-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+}
+
+.identity-badge {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.identity-role {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+/* Technical Stack Pills (What type of technology I work with) */
+.hero-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--paper-translucent);
+  border: 1.5px solid var(--ink-border);
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  transition: background-color 0.15s steps(2), transform 0.15s steps(2), box-shadow 0.15s steps(2);
+}
+
+.tech-pill:hover {
+  background: var(--paper-card);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px var(--ink);
+}
+
+.tech-pill-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* 4. One Short Description */
+.hero-description {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 580px;
+  margin: 0 0 2rem 0;
+}
+
+/* 5 & 6. Primary & Secondary CTAs */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.65rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: transform 0.15s steps(2), box-shadow 0.15s steps(2), background-color 0.15s steps(2), color 0.15s steps(2);
+  user-select: none;
+  cursor: pointer;
+}
+
+.hero-btn.primary-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink-border);
+  box-shadow: 3px 3px 0px var(--paper-card);
+}
+
+.hero-btn.primary-btn:hover {
+  background: var(--paper-card);
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--ink);
+}
+
+.hero-btn.primary-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.hero-btn.primary-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.hero-btn.secondary-btn {
+  background: var(--paper-translucent);
+  color: var(--ink);
+  border: 2px solid var(--ink-border);
+  box-shadow: 3px 3px 0px var(--ink-border);
+}
+
+.hero-btn.secondary-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--ink-muted);
+}
+
+.hero-btn.secondary-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.btn-dot-live {
+  width: 8px;
+  height: 8px;
+  background-color: var(--ink);
+  border-radius: 50%;
+  display: inline-block;
+  animation: eink-pulse 1.5s infinite steps(2);
+}
+
+.hero-btn.secondary-btn:hover .btn-dot-live {
+  background-color: var(--paper);
+}
+
+/* 7. Optional GitHub / LinkedIn Links Bar */
+.hero-social-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1.5px stroke var(--ink-border);
+  border-top-style: dashed;
+  width: 100%;
+  max-width: 580px;
+}
+
+.social-bar-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+.hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.15s steps(2);
+}
+
+.hero-social-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: var(--ink);
+  transition: width 0.25s ease;
+}
+
+.hero-social-link:hover::after {
+  width: 100%;
+}
+
+.social-link-icon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Right Column: Round E-Ink Profile Avatar Container */
+.hero-avatar-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Round avatar ring styled for E-Ink screen */
+.avatar-eink-ring {
+  position: relative;
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  padding: 8px;
+  background: var(--paper-card);
+  border: 2px solid var(--ink-border);
+  box-shadow: 6px 6px 0px var(--ink);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-eink-ring:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px var(--ink);
+}
+
+.avatar-img-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--ink-border);
+  background: var(--paper);
+  position: relative;
+}
+
+/* Round Avatar Image with E-Ink Compatibility Filter */
+.avatar-eink-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  /* E-ink grayscale & contrast compatibility filter */
+  filter: grayscale(100%) contrast(110%) brightness(98%);
+  transition: filter 0.3s ease, transform 0.4s ease;
+}
+
+:root[data-theme="dark"] .avatar-eink-img {
+  filter: grayscale(100%) contrast(115%) brightness(90%);
+}
+
+.avatar-eink-ring:hover .avatar-eink-img {
+  filter: grayscale(100%) contrast(120%) brightness(100%);
+  transform: scale(1.04);
+}
+
+/* E-Ink Status Badge Below Avatar */
+.avatar-badge {
+  margin-top: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink-border);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px var(--ink-border);
+}
+
+.avatar-badge-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--ink);
+  border-radius: 50%;
+  animation: eink-pulse 1.5s infinite steps(2);
+}
+
+.avatar-meta-tag {
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+}
+
+/* Projects Showcase Section Styles */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: transform 0.2s steps(2), box-shadow 0.2s steps(2);
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 5px 5px 0px var(--ink);
+}
+
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+
+.project-title {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink);
+}
+
+.project-desc {
+  font-family: var(--font-serif);
+  font-size: 0.975rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.project-stack {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-stack span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: var(--paper);
+  border: 1px solid var(--ink-border);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Responsive Layout (Mobile & Tablet)
+   ========================================================================== */
+
+@media (max-width: 868px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    text-align: left;
+  }
+
+  .hero-avatar-column {
+    order: -1;
+    margin-bottom: 0.25rem;
+  }
+
+  .avatar-eink-ring {
+    width: 210px;
+    height: 210px;
+    box-shadow: 4px 4px 0px var(--ink);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-btn {
+    width: 100%;
+  }
+
+  .hero-social-bar {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+}
+
+
 
 

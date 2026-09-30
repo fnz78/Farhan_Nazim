@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Portfolio | E-Ink Experience</title>
   <meta name="description" content="Minimalist e-ink portfolio featuring interactive fluid ink animations.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -37,12 +37,7 @@
       <!-- Right Controls & Status -->
       <div class="nav-controls">
 
-        <!-- Refresh Flash Button -->
-        <button id="refreshBtn" class="eink-btn" title="Trigger E-Ink Flash Refresh" aria-label="Refresh E-Ink Display">
-          <svg class="eink-btn-icon" viewBox="0 0 24 24">
-            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
-          </svg>
-        </button>
+
 
         <!-- Theme Toggle Button -->
         <button id="themeToggle" class="eink-btn" title="Toggle Theme" aria-label="Toggle Light/Dark Theme">
@@ -71,6 +66,144 @@
 
   <!-- Main Scrollable Content Container -->
   <main class="main-content">
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section portfolio-section">
+      <div class="hero-container">
+
+        <!-- Left Column: Primary Information -->
+        <div class="hero-content">
+
+          <!-- 1. Small Professional Eyebrow/Label -->
+          <div class="hero-eyebrow" aria-label="Status Label">
+            <span class="eyebrow-dot"></span>
+            <span class="eyebrow-text">FNZ78 // AVAILABLE FOR WORK</span>
+          </div>
+
+          <!-- 2. My Name -->
+          <h1 class="hero-title">
+            <span class="hero-name-primary">KN FARHAN</span>
+            <span class="hero-name-secondary">NAZIM</span>
+          </h1>
+
+          <!-- 3. Professional Identity -->
+          <div class="hero-identity-container">
+            <div class="hero-identity">
+              <span class="identity-badge">Computer Science PostGraduate</span>
+              <span class="identity-role">Software & Systems Engineer</span>
+            </div>
+          </div>
+
+          <!-- Technical Focus / Stack Pills (What type of technology I work with) -->
+          <div class="hero-tech-row" aria-label="Technologies Worked With">
+            <span class="tech-pill">
+              <svg class="tech-pill-icon" viewBox="0 0 24 24">
+                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" />
+              </svg>
+              <span>Full-Stack Web</span>
+            </span>
+            <span class="tech-pill">
+              <svg class="tech-pill-icon" viewBox="0 0 24 24">
+                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none" />
+                <path d="M9 9h6v6H9z" fill="currentColor" />
+              </svg>
+              <span>Software Systems</span>
+            </span>
+            <span class="tech-pill">
+              <svg class="tech-pill-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none" />
+                <path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <span>AI & Machine Learning</span>
+            </span>
+            <span class="tech-pill">
+              <svg class="tech-pill-icon" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"
+                  fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+
+            </span>
+          </div>
+
+          <!-- 5 & 6. Primary CTA & Secondary CTA -->
+          <div class="hero-actions">
+            <!-- Primary CTA: View Projects -->
+            <a href="#projects" class="hero-btn primary-btn">
+              <span>VIEW PROJECTS</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+
+            <!-- Secondary CTA: Contact Me -->
+            <a href="#contact" class="hero-btn secondary-btn">
+              <span class="btn-dot-live"></span>
+              <span>CONTACT ME</span>
+            </a>
+          </div>
+
+
+
+        </div>
+
+        <!-- Right Column: Round E-Ink Profile Avatar Container -->
+        <div class="hero-avatar-column">
+          <div class="avatar-card-container">
+
+            <!-- Round E-Ink Avatar Ring Frame -->
+            <div class="avatar-eink-ring">
+              <div class="avatar-img-frame">
+                <img src="assets/images/profile-avatar.png" alt="K N Farhan Nazim - Computer Science PostGraduate"
+                  class="avatar-eink-img" loading="eager" />
+              </div>
+            </div>
+
+            <!-- E-Ink Status Badge Below Avatar -->
+            <div class="avatar-badge">
+              <span class="avatar-badge-dot"></span>
+              <span>MSc COMPUTER SCIENCE</span>
+            </div>
+
+            <!-- Technical E-Ink Spec Label -->
+            <div class="avatar-meta-tag">
+              <span>REF: FNZ_SYS_2026</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects Section Placeholder -->
+    <section id="projects" class="portfolio-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-dot"></span>
+          <span>FEATURED PROJECTS</span>
+        </h2>
+        <p class="section-subtitle">A curated selection of software systems, applications, and experiments.</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="eink-card project-card">
+          <div class="project-tag">WEB / ANIMATION</div>
+          <h3 class="project-title">E-Ink Fluid Motion Engine</h3>
+          <p class="project-desc">Interactive canvas-based fluid ink dynamics optimized for monochrome displays and
+            high-efficiency graphics rendering.</p>
+          <div class="project-stack"><span>JavaScript</span><span>HTML5 Canvas</span><span>CSS System</span></div>
+        </div>
+        <div class="eink-card project-card">
+          <div class="project-tag">SOFTWARE / SYSTEMS</div>
+          <h3 class="project-title">Algorithmic Resource Allocator</h3>
+          <p class="project-desc">High-performance system service designed for concurrent task execution and low-latency
+            state evaluation.</p>
+          <div class="project-stack"><span>Python</span><span>Data Structures</span><span>Async IO</span></div>
+        </div>
+      </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="portfolio-section">
@@ -102,7 +235,8 @@
                 <span>FULL NAME</span>
                 <span class="required-star">*</span>
               </label>
-              <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Farhan Nazim" required data-fs-field>
+              <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Farhan Nazim" required
+                data-fs-field>
               <span class="form-error-text" data-fs-error="name"></span>
             </div>
 
@@ -112,7 +246,8 @@
                 <span>EMAIL ADDRESS</span>
                 <span class="required-star">*</span>
               </label>
-              <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required data-fs-field>
+              <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required
+                data-fs-field>
               <span class="form-error-text" data-fs-error="email"></span>
             </div>
 
@@ -122,7 +257,8 @@
                 <span>YOUR MESSAGE</span>
                 <span class="required-star">*</span>
               </label>
-              <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Share details about your idea or project..." required data-fs-field></textarea>
+              <textarea id="message" name="message" class="form-textarea" rows="5"
+                placeholder="Share details about your idea or project..." required data-fs-field></textarea>
               <span class="form-error-text" data-fs-error="message"></span>
             </div>
 
@@ -142,7 +278,8 @@
         <div id="formSuccessBanner" class="form-success-banner" data-fs-success>
           <div class="success-icon">✦</div>
           <h3 class="success-title">MESSAGE TRANSMITTED</h3>
-          <p class="success-desc">Thank you for reaching out! I have received your note and will get back to you shortly.</p>
+          <p class="success-desc">Thank you for reaching out! I have received your note and will get back to you
+            shortly.</p>
           <button id="resetFormBtn" class="eink-submit-btn" style="box-shadow: none;">
             <span>SEND ANOTHER MESSAGE</span>
           </button>
@@ -153,23 +290,37 @@
       <!-- Quick Contact SVG Outline Icon Buttons -->
       <div class="contact-social-row" aria-label="Direct Contact Icons">
         <!-- Direct Email -->
-        <a href="mailto:farhannazimfnz@gmail.com" class="social-icon-btn large" aria-label="Direct Email" data-tooltip="farhannazimfnz@gmail.com">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"/></svg>
+        <a href="mailto:farhannazimfnz@gmail.com" class="social-icon-btn large" aria-label="Direct Email"
+          data-tooltip="farhannazimfnz@gmail.com">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" />
+          </svg>
         </a>
 
         <!-- Phone -->
         <a href="tel:+916238688556" class="social-icon-btn large" aria-label="Phone" data-tooltip="+91 6238688556">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
         </a>
 
         <!-- GitHub -->
-        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn large" aria-label="GitHub" data-tooltip="github.com/fnz78">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn large"
+          aria-label="GitHub" data-tooltip="github.com/fnz78">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
         </a>
 
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/k-n-farhan-nazim-402122306/" target="_blank" rel="noopener noreferrer" class="social-icon-btn large" aria-label="LinkedIn" data-tooltip="LinkedIn Profile">
-          <svg class="social-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/></svg>
+        <a href="https://www.linkedin.com/in/k-n-farhan-nazim-402122306/" target="_blank" rel="noopener noreferrer"
+          class="social-icon-btn large" aria-label="LinkedIn" data-tooltip="LinkedIn Profile">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z" />
+          </svg>
         </a>
       </div>
 
@@ -180,7 +331,7 @@
   <!-- E-Ink Floating Footer Container -->
   <footer class="footer-container">
     <div class="eink-footer" aria-label="Footer Navigation">
-      
+
       <!-- Brand Logo / Monogram -->
       <a href="#home" class="footer-brand" aria-label="FNZ Home">
         <span class="brand-dot"></span>
@@ -191,30 +342,36 @@
       <!-- Social Outline Icon Links -->
       <div class="social-links" aria-label="Social Links">
         <!-- GitHub -->
-        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub" data-tooltip="GitHub">
+        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
+          aria-label="GitHub" data-tooltip="GitHub">
           <svg class="social-icon" viewBox="0 0 24 24">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
           </svg>
         </a>
 
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/k-n-farhan-nazim-402122306/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn" data-tooltip="LinkedIn">
+        <a href="https://www.linkedin.com/in/k-n-farhan-nazim-402122306/" target="_blank" rel="noopener noreferrer"
+          class="social-icon-btn" aria-label="LinkedIn" data-tooltip="LinkedIn">
           <svg class="social-icon" viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/>
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z" />
           </svg>
         </a>
 
         <!-- Email -->
-        <a href="mailto:farhannazimfnz@gmail.com" class="social-icon-btn" aria-label="Email" data-tooltip="Email: farhannazimfnz@gmail.com">
+        <a href="mailto:farhannazimfnz@gmail.com" class="social-icon-btn" aria-label="Email"
+          data-tooltip="Email: farhannazimfnz@gmail.com">
           <svg class="social-icon" viewBox="0 0 24 24">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6"/>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" />
           </svg>
         </a>
 
         <!-- Phone -->
         <a href="tel:+916238688556" class="social-icon-btn" aria-label="Phone" data-tooltip="Phone: +91 6238688556">
           <svg class="social-icon" viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
           </svg>
         </a>
       </div>
@@ -228,8 +385,8 @@
   </footer>
 
   <!-- External JavaScript Files -->
-  <script src="inkflow.js"></script>
-  <script src="script.js"></script>
+  <script src="assets/js/inkflow.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>
