@@ -818,6 +818,32 @@ body:not(.flash) .eink-footer {
   white-space: nowrap;
 }
 
+/* Quick Contact SVG Outline Icon Buttons Row */
+.contact-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.social-icon-btn.large {
+  width: 48px;
+  height: 48px;
+  border-width: 2px;
+  box-shadow: 3px 3px 0px var(--ink-border);
+}
+
+.social-icon-btn.large .social-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.social-icon-btn.large:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0px var(--ink-border);
+}
+
 /* Responsive Form Layout */
 @media (max-width: 768px) {
   .main-content {
@@ -839,6 +865,16 @@ body:not(.flash) .eink-footer {
   .section-subtitle {
     font-size: 1rem;
   }
+
+  .contact-social-row {
+    gap: 0.85rem;
+  }
+
+  .social-icon-btn.large {
+    width: 42px;
+    height: 42px;
+  }
 }
+
 
 
