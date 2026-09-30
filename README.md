@@ -2,8 +2,6 @@
 
 A minimalist, high-performance personal portfolio featuring interactive e-ink fluid dynamics, custom paper textures, and responsive design.
 
-![E-Ink Portfolio Preview](assets/images/profile-avatar.png)
-
 ---
 
 ## ✦ Key Features
