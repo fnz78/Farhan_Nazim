@@ -62,10 +62,11 @@
 }
 
 html, body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -520,4 +521,324 @@ body:not(.flash) .eink-footer {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Main Content Layout & Section Styles
+   ========================================================================== */
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6rem 1.25rem 8rem 1.25rem;
+}
+
+.portfolio-section {
+  scroll-margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+/* Section Header Typography */
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--ink);
+  margin: 0 0 0.5rem 0;
+}
+
+.section-dot {
+  width: 14px;
+  height: 14px;
+  background-color: var(--ink);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px var(--paper);
+}
+
+.section-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* E-Ink Card Container */
+.eink-card {
+  background: var(--paper-translucent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid var(--ink-border);
+  border-radius: 20px;
+  padding: 2.25rem;
+  box-shadow: var(--eink-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Form Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.required-star {
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+}
+
+/* Input Fields */
+.form-input,
+.form-textarea,
+.form-select {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--ink-border);
+  border-radius: 10px;
+  width: 100%;
+  transition: border-color 0.15s steps(2), background-color 0.15s steps(2), outline 0.15s steps(2);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--ink-muted);
+  opacity: 0.7;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+  background: var(--paper-card);
+}
+
+.form-input.invalid,
+.form-textarea.invalid {
+  border-color: #d93025;
+  background: rgba(217, 48, 37, 0.06);
+}
+
+/* Validation Error Text */
+.form-error-text {
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  color: #d93025;
+  font-weight: 600;
+  margin-top: 0.15rem;
+  display: none;
+}
+
+/* Form Submit Button */
+.eink-submit-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink-border);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 3px 3px 0px var(--paper-card);
+  transition: transform 0.15s steps(2), box-shadow 0.15s steps(2), background-color 0.15s steps(2), color 0.15s steps(2);
+  user-select: none;
+  margin-top: 0.5rem;
+}
+
+.eink-submit-btn:hover {
+  background: var(--paper-card);
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--ink);
+}
+
+.eink-submit-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.eink-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-dot {
+  font-size: 0.9rem;
+}
+
+.btn-dot-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: eink-pulse 1s infinite steps(2);
+}
+
+/* Success & Error Banners */
+.form-success-banner {
+  background: var(--paper-card);
+  border: 2px solid var(--ink-border);
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--eink-shadow);
+  display: none;
+}
+
+.success-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.success-title {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.success-desc {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
+
+.form-error-banner {
+  background: rgba(217, 48, 37, 0.1);
+  border: 1.5px solid #d93025;
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  display: none;
+}
+
+/* Contact Details Info Cards */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.info-card {
+  background: var(--paper);
+  border: 1.5px solid var(--ink-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  transition: transform 0.15s steps(2), box-shadow 0.15s steps(2), background-color 0.15s steps(2);
+}
+
+.info-card:hover {
+  background: var(--paper-card);
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0px var(--ink);
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.info-label {
+  font-size: 0.675rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  display: block;
+}
+
+.info-value {
+  font-weight: 700;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive Form Layout */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 5rem 0.85rem 7rem 0.85rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eink-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
 

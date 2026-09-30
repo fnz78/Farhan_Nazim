@@ -1,13 +1,22 @@
 /**
- * Ink Flow Animated Background Controller
- * Renders an organic e-ink flow wave effect with pointer displacement
+ * Ink Flow Animated Background Controller (Ultra-Optimized)
+ * Renders an organic e-ink flow wave effect with zero-GC memory pooling & adaptive DPI
  */
 (function () {
   let cv, ctx;
-  let W, H, dpr, N = 17, P = 90, t = 0, last = 0;
+  let W, H, dpr, N = 15, P = 65, t = 0, last = 0;
   let reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let ptr = { x: -9999, y: -9999, sx: -9999, sy: -9999, on: false, power: 0, kick: 0 };
   let css;
+
+  // Pre-allocated object pool to prevent Garbage Collection stutter
+  let pts = [];
+  function initPointPool(maxP) {
+    pts = new Array(maxP + 1);
+    for (let i = 0; i <= maxP; i++) {
+      pts[i] = { x: 0, y: 0 };
+    }
+  }
 
   function updateThemeColors() {
     css = getComputedStyle(document.documentElement);
@@ -15,11 +24,22 @@
 
   function resize() {
     if (!cv) return;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Cap DPR at 1.5 max for silky smooth rendering on retina/4k displays
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     W = window.innerWidth;
     H = window.innerHeight;
-    cv.width = W * dpr;
-    cv.height = H * dpr;
+
+    // Adaptive line count and points based on screen width
+    const isMobile = W < 768;
+    N = isMobile ? 11 : 15;
+    P = isMobile ? 45 : 65;
+
+    if (pts.length <= P) {
+      initPointPool(P);
+    }
+
+    cv.width = Math.floor(W * dpr);
+    cv.height = Math.floor(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = css.getPropertyValue('--paper').trim() || '#dcdcd7';
     ctx.fillRect(0, 0, W, H);
@@ -47,8 +67,8 @@
     ptr.on = false;
   }
 
+  const tempC = [0, 0];
   function centre(u, tt, out) {
-    // diagonal S sweep, bottom-left to top-right
     const x = -0.05 * W + u * 1.1 * W;
     const base = H * (0.72 - 0.46 * u);
     const amp = H * 0.09;
@@ -64,7 +84,6 @@
     last = ts;
     t += dt * (reduce ? 0.15 : 1);
 
-    // smooth pointer + power
     if (ptr.on) {
       ptr.sx += (ptr.x - ptr.sx) * Math.min(1, dt * 9);
       ptr.sy += (ptr.y - ptr.sy) * Math.min(1, dt * 9);
@@ -75,7 +94,7 @@
     const paperColor = css.getPropertyValue('--paper').trim() || '#dcdcd7';
     const inkColor = css.getPropertyValue('--ink').trim() || '#1c1c1a';
 
-    // e-ink ghosting: partial fade instead of hard clear
+    // e-ink ghosting effect
     ctx.globalAlpha = 0.24;
     ctx.fillStyle = paperColor;
     ctx.fillRect(0, 0, W, H);
@@ -86,18 +105,15 @@
 
     const radius = Math.max(120, Math.min(W, H) * 0.24);
     const r2 = radius * radius;
-    const pts = new Array(P + 1);
-    const c = [0, 0];
 
     for (let i = 0; i < N; i++) {
       const k = i / (N - 1) - 0.5;
       for (let j = 0; j <= P; j++) {
         const u = j / P;
-        centre(u, t, c);
-        // ribbon spread pinches and swells along the length
+        centre(u, t, tempC);
         const spread = H * (0.012 + 0.016 * (0.5 + 0.5 * Math.sin(u * 6.0 - t * 0.3))) * (1 + 0.9 * Math.sin(u * Math.PI));
-        let x = c[0] + k * spread * N * 0.35;
-        let y = c[1] + k * spread * N * 1.0 + Math.sin(u * 7 + i * 0.35 + t * 0.6) * H * 0.006;
+        let x = tempC[0] + k * spread * N * 0.35;
+        let y = tempC[1] + k * spread * N * 1.0 + Math.sin(u * 7 + i * 0.35 + t * 0.6) * H * 0.006;
 
         if (ptr.power > 0.01) {
           const dx = x - ptr.sx;
@@ -111,15 +127,17 @@
             y += dy / d * push;
           }
         }
-        pts[j] = [x, y];
+
+        pts[j].x = x;
+        pts[j].y = y;
       }
 
       ctx.beginPath();
-      ctx.moveTo(pts[0][0], pts[0][1]);
+      ctx.moveTo(pts[0].x, pts[0].y);
       for (let m = 1; m < P; m++) {
-        const mx = (pts[m][0] + pts[m + 1][0]) / 2;
-        const my = (pts[m][1] + pts[m + 1][1]) / 2;
-        ctx.quadraticCurveTo(pts[m][0], pts[m][1], mx, my);
+        const mx = (pts[m].x + pts[m + 1].x) * 0.5;
+        const my = (pts[m].y + pts[m + 1].y) * 0.5;
+        ctx.quadraticCurveTo(pts[m].x, pts[m].y, mx, my);
       }
       ctx.lineWidth = 0.7 + (1 - Math.abs(k) * 2) * 0.6 + ptr.power * 0.3;
       ctx.globalAlpha = 0.35 + 0.55 * (1 - Math.abs(k) * 1.6 > 0 ? 1 - Math.abs(k) * 1.6 : 0.05);
@@ -133,6 +151,7 @@
     cv = document.getElementById('c');
     if (!cv) return;
     ctx = cv.getContext('2d');
+    initPointPool(70);
     updateThemeColors();
     resize();
 
@@ -142,30 +161,32 @@
       resize();
     });
 
-    // Observer for manual data-theme changes on <html> tag
     const observer = new MutationObserver(() => {
       updateThemeColors();
       resize();
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    cv.addEventListener('pointermove', move);
-    cv.addEventListener('pointerdown', (e) => {
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerdown', (e) => {
+      // Don't trigger flash on interactive elements like inputs or buttons
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON' || e.target.closest('a')) {
+        return;
+      }
       move(e);
       ptr.kick = 1;
       triggerFlash();
     });
 
-    cv.addEventListener('pointerup', (e) => {
+    window.addEventListener('pointerup', (e) => {
       if (e.pointerType !== 'mouse') leave();
     });
-    cv.addEventListener('pointercancel', leave);
-    cv.addEventListener('pointerleave', leave);
+    window.addEventListener('pointercancel', leave);
+    window.addEventListener('pointerleave', leave);
 
     requestAnimationFrame(frame);
   }
 
-  // Expose flash trigger for navbar refresh button
   window.triggerEInkFlash = triggerFlash;
 
   if (document.readyState === 'loading') {
