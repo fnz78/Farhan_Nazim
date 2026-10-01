@@ -62,6 +62,11 @@ Depending on where you host your portfolio, use the corresponding configuration 
 ### 3. Clickjacking & Frame Protection
 - `X-Frame-Options: DENY` & `frame-ancestors 'none'` prevent the portfolio from being embedded inside malicious `<iframe>` tags.
 
+### 4. Secrets & Environment Protection Rule
+- **Rule**: Never hardcode backend API keys, private passwords, access tokens, or secret credentials in frontend JavaScript (`const API_KEY = "..."`). All frontend code is publicly exposed and readable in the browser.
+- **Environment Isolation**: Keep secrets on backend servers or environment management platforms.
+- **Git Safeguards**: `.env`, `.env.*`, `*.pem`, `*.key`, and `secrets/` are strictly excluded via [`.gitignore`](file:///d:/FINALE/.gitignore) to prevent accidental credential leakage. Template variables are maintained in [`.env.example`](file:///d:/FINALE/.env.example).
+
 ---
 
 ## 🧪 Verification & Audit Command

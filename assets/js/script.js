@@ -236,9 +236,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const formData = new FormData(contactForm);
+      const formEndpoint = (typeof window !== 'undefined' && window.ENV && window.ENV.FORMSPREE_ENDPOINT)
+        || contactForm.getAttribute('action')
+        || 'https://formspree.io/f/mdekbvjj';
 
       try {
-        const response = await fetch('https://formspree.io/f/mdekbvjj', {
+        const response = await fetch(formEndpoint, {
           method: 'POST',
           body: formData,
           headers: {
