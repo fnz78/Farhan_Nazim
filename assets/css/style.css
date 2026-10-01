@@ -1412,22 +1412,20 @@ html {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--paper-translucent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--ink-border);
-  border-radius: 18px;
-  padding: 1.25rem 0;
-  box-shadow: var(--eink-shadow);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1rem 0;
+  box-shadow: none;
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .eink-marquee-track {
   display: flex;
   width: max-content;
-  gap: 0.85rem;
+  gap: 1.25rem;
+  align-items: center;
   animation: marqueeScroll 45s linear infinite;
   will-change: transform;
 }
@@ -1450,25 +1448,29 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   padding: 0;
-  border: 1.5px solid var(--ink-border);
-  border-radius: 14px;
-  background: var(--paper);
+  border: none;
+  border-radius: 0;
+  background: transparent;
   color: var(--ink);
-  opacity: 0.9;
+  opacity: 0.85;
   user-select: none;
   cursor: pointer;
-  transition: background-color 0.15s steps(2), color 0.15s steps(2), transform 0.15s steps(2), box-shadow 0.15s steps(2), opacity 0.15s steps(2);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.tech-marquee-item span {
+  display: none;
 }
 
 .tech-marquee-item:hover {
   opacity: 1;
-  background: var(--ink);
-  color: var(--paper);
-  transform: translateY(-3px);
-  box-shadow: 3px 3px 0px var(--ink-border);
+  background: transparent;
+  color: var(--ink);
+  transform: translateY(-4px) scale(1.2);
+  box-shadow: none;
 }
 
 /* Tactile E-Ink Tooltip on Icon Hover */
