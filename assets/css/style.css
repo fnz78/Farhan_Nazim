@@ -1514,7 +1514,7 @@ html {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: transparent;
+  background-color: var(--paper);
   color: var(--ink);
   z-index: 99999;
   display: flex;
@@ -1542,13 +1542,10 @@ html {
   max-width: 460px;
   text-align: center;
   padding: 2.5rem 1.75rem;
-  background: var(--paper-translucent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--paper-card);
   border: 2px solid var(--ink-border);
   box-shadow: 6px 6px 0px var(--ink);
   position: relative;
-  z-index: 2;
 }
 
 .preloader-eyebrow {
@@ -1641,6 +1638,341 @@ html {
 .status-indicator {
   font-size: 0.65rem;
   color: var(--ink);
+}
+
+/* ==========================================================================
+   Certifications & Licenses Timeline Styling
+   ========================================================================== */
+.nav-cert-btn {
+  color: var(--ink);
+}
+
+.nav-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.btn-text-desktop {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .btn-text-desktop {
+    display: none;
+  }
+}
+
+.cert-hero-section {
+  padding-top: 7rem;
+  padding-bottom: 2.5rem;
+}
+
+.cert-hero-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cert-back-bar {
+  margin-bottom: 1.5rem;
+}
+
+.cert-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background: var(--paper-card);
+  border: 2px solid var(--ink-border);
+  box-shadow: 3px 3px 0px var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cert-back-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--ink);
+}
+
+.cert-back-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cert-page-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.cert-page-desc {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.cert-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.cert-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--paper-card);
+  border: 1px solid var(--ink-border);
+  border-radius: 999px;
+  color: var(--ink);
+}
+
+.stat-bullet {
+  font-size: 0.85rem;
+}
+
+.cert-year-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--ink-muted);
+}
+
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+.year-chip {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.35rem 0.85rem;
+  border: 2px solid var(--ink-border);
+  border-radius: 8px;
+  background: var(--paper);
+  transition: all 0.15s ease;
+}
+
+.year-chip:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.cert-timeline-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cert-year-group {
+  margin-bottom: 4rem;
+  scroll-margin-top: 6rem;
+}
+
+.year-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.year-number {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.year-line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: var(--ink-border);
+}
+
+.month-block {
+  margin-bottom: 2.5rem;
+}
+
+.month-title {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.month-title::before {
+  content: "✦";
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Curved E-Ink Certification Card */
+.cert-card {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--paper-card);
+  border: 2px solid var(--ink-border);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.cert-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--ink);
+}
+
+/* Curved Provider Logo Allocation Box */
+.cert-logo-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  border: 2px solid var(--ink-border);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0px var(--ink);
+  transition: transform 0.2s ease;
+}
+
+.cert-card:hover .cert-logo-box {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+.provider-logo-svg {
+  width: 32px;
+  height: 32px;
+  color: var(--ink);
+}
+
+.cert-card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cert-issuer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+
+.cert-date {
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.cert-title {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.cert-desc {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.cert-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.cert-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  background: var(--paper);
+  border: 1px solid var(--ink-border);
+  border-radius: 6px;
+  color: var(--ink);
+}
+
+/* Card Variants */
+.highlight-card {
+  border-width: 2px;
+  background: var(--paper-translucent);
+}
+
+.prize-card {
+  border-width: 2.5px;
+}
+
+.prize-card .cert-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
 }
 
 

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Licenses & Certifications | KN FARHAN NAZIM</title>
+  <meta name="description" content="Timeline of licenses, certifications, awards, and technical milestones by KN Farhan Nazim.">
+  <!-- Security Headers & Content Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests;">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- Fullscreen E-Ink Loading Preloader -->
+  <div id="einkPreloader" class="eink-preloader" aria-label="Loading Website" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="preloader-content">
+      <div class="preloader-eyebrow">
+        <span class="preloader-dot"></span>
+        <span>KN FARHAN NAZIM // TIMELINE</span>
+      </div>
+      <div class="preloader-title">
+        <span class="preloader-word">CERTIFI-</span>
+        <span class="preloader-word">CATIONS</span>
+      </div>
+      <div class="preloader-slider-container">
+        <svg class="preloader-curve-svg" viewBox="0 0 400 60" preserveAspectRatio="none">
+          <path class="preloader-curve-bg" d="M 10 30 Q 100 5, 200 30 T 390 30" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.25" />
+          <path id="preloaderCurveProgress" class="preloader-curve-fill" d="M 10 30 Q 100 5, 200 30 T 390 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+        </svg>
+        <div class="preloader-counter">
+          <span id="preloaderPercent">0</span><span class="percent-symbol">%</span>
+        </div>
+      </div>
+      <div class="preloader-status">
+        <span class="status-indicator">●</span>
+        <span id="preloaderStatusText">INITIALIZING SYSTEM...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated E-Ink Background Canvas -->
+  <canvas id="c"></canvas>
+
+  <!-- E-Ink Floating Navbar Container -->
+  <header class="navbar-container">
+    <nav class="eink-navbar" aria-label="Main Navigation">
+
+      <!-- Brand Logo / Monogram -->
+      <a href="index.html" class="nav-brand" aria-label="Home">
+        <span class="brand-dot"></span>
+        <span>FNZ</span>
+        <span class="brand-tag">78</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#projects" class="nav-link">Work</a></li>
+        <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+        <li><a href="certifications.html" class="nav-link active">Certifications</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right Controls & Status -->
+      <div class="nav-controls">
+
+        <!-- Prominent Back to Portfolio Button -->
+        <a href="index.html" class="eink-btn nav-back-btn" title="Back to Portfolio" aria-label="Back to Main Portfolio">
+          <svg class="eink-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span class="btn-text-desktop">PORTFOLIO</span>
+        </a>
+
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="eink-btn" title="Toggle Theme" aria-label="Toggle Light/Dark Theme">
+          <svg class="eink-btn-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+        </button>
+
+        <!-- E-Ink Clock Status Display -->
+        <div class="eink-status">
+          <span class="eink-status-time" id="einkClock">--:--</span>
+        </div>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+          </svg>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- Page Header Section -->
+    <section class="portfolio-section cert-hero-section">
+      <div class="cert-hero-container">
+
+        <div class="cert-back-bar">
+          <a href="index.html" class="cert-back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Portfolio Home</span>
+          </a>
+        </div>
+
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span class="eyebrow-text">ACADEMIC & PROFESSIONAL CREDENTIALS</span>
+        </div>
+
+        <h1 class="hero-title cert-page-title">
+          <span class="hero-name-primary">LICENSES &</span>
+          <span class="hero-name-secondary">CERTIFICATIONS</span>
+        </h1>
+
+        <p class="cert-page-desc">
+          Chronological timeline of accredited certifications, national hackathon prizes, AI research achievements, and university qualifications.
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="cert-stats-row">
+          <div class="cert-stat-pill">
+            <span class="stat-bullet">●</span>
+            <span>28 Accredited Milestones</span>
+          </div>
+          <div class="cert-stat-pill">
+            <span class="stat-bullet">✦</span>
+            <span>UGC-NET Qualified (CompSci)</span>
+          </div>
+          <div class="cert-stat-pill">
+            <span class="stat-bullet">★</span>
+            <span>National Hackathon & Web Design Prizes</span>
+          </div>
+        </div>
+
+        <!-- Quick Jump Filter -->
+        <div class="cert-year-filter">
+          <span class="filter-label">JUMP TO YEAR:</span>
+          <a href="#year-2026" class="year-chip">2026</a>
+          <a href="#year-2025" class="year-chip">2025</a>
+          <a href="#year-2024" class="year-chip">2024</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Timeline Content Section -->
+    <section class="portfolio-section cert-timeline-section">
+      <div class="cert-timeline-container">
+
+        <!-- ==================== YEAR 2026 ==================== -->
+        <div id="year-2026" class="cert-year-group">
+          <div class="year-header-badge">
+            <span class="year-number">2026</span>
+            <span class="year-line"></span>
+          </div>
+
+          <!-- September 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">September 2026</h3>
+            <div class="cert-grid">
+
+              <!-- Google Cloud GenAI -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Google Cloud Logo Slot">
+                  <!-- Provider Logo: Google Cloud -->
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Google Cloud Skills Boost</span>
+                    <span class="cert-date">Sep 2026</span>
+                  </div>
+                  <h4 class="cert-title">Introduction to Generative AI</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Generative AI</span>
+                    <span class="cert-tag">LLMs</span>
+                    <span class="cert-tag">Google Cloud</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HackerRank Orchestrate -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="HackerRank Logo Slot">
+                  <!-- Provider Logo: HackerRank -->
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm-1.2 17.4H8.4V6.6h2.4v10.8zm4.8 0h-2.4V6.6h2.4v10.8z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">HackerRank</span>
+                    <span class="cert-date">Sep 2026</span>
+                  </div>
+                  <h4 class="cert-title">HackerRank Orchestrate September Edition</h4>
+                  <p class="cert-desc">Ranked #1,482 out of 3,062 candidates. Demonstrated advanced skills in Autonomous AI Agents and Exploratory Data Analysis (EDA).</p>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Rank #1482</span>
+                    <span class="cert-tag">AI Agents</span>
+                    <span class="cert-tag">EDA</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- July 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">July 2026</h3>
+            <div class="cert-grid">
+
+              <!-- Resource Person Academic Speaker -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="Academic / College Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Sreekrishnapuram V. T. Bhattathiripad College</span>
+                    <span class="cert-date">Jul 2026</span>
+                  </div>
+                  <h4 class="cert-title">Resource Person – Evolution of AI: From ML to Autonomous AI Agents</h4>
+                  <p class="cert-desc">Invited speaker & resource person delivering academic session on ML architecture and Multi-Agent Orchestration.</p>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Speaker</span>
+                    <span class="cert-tag">AI Agents</span>
+                    <span class="cert-tag">Academic Session</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Anthropic AI -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Anthropic Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.84 3.75h-3.68L4 20.25h3.67l1.74-4.82h5.18l1.74 4.82h3.67L13.84 3.75zm-3.32 8.79l1.48-4.11 1.48 4.11h-2.96z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Anthropic</span>
+                    <span class="cert-date">Jul 2026</span>
+                  </div>
+                  <h4 class="cert-title">AI Capabilities and Limitations</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Anthropic</span>
+                    <span class="cert-tag">AI Safety</span>
+                    <span class="cert-tag">Claude Architecture</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- May 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">May 2026</h3>
+            <div class="cert-grid">
+
+              <!-- Cisco AI -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Cisco Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1 14.5v-9l7 4.5-7 4.5z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Cisco</span>
+                    <span class="cert-date">May 2026</span>
+                  </div>
+                  <h4 class="cert-title">Introduction to Modern AI</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Cisco</span>
+                    <span class="cert-tag">Modern AI</span>
+                    <span class="cert-tag">Networking & AI</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- March 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">March 2026</h3>
+            <div class="cert-grid">
+
+              <!-- Build With AI Hackathon -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="Hackathon Award Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="7"/>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">MULearn SIMAT (SPT)</span>
+                    <span class="cert-date">Mar 2026</span>
+                  </div>
+                  <h4 class="cert-title">Build With AI Hackathon – Participation & Project Showcase</h4>
+                  <p class="cert-desc">Built Kerala Coastal Climate Visualizer using Python, Data Analytics & Gemini 2.5 Flash API.</p>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Hackathon</span>
+                    <span class="cert-tag">Gemini 2.5</span>
+                    <span class="cert-tag">Climate Tech</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 1st Prize Web Design -->
+              <div class="cert-card prize-card">
+                <div class="cert-logo-box" title="Trophy / 1st Prize Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Hindusthan College Of Arts And Science</span>
+                    <span class="cert-date">Mar 2026</span>
+                  </div>
+                  <h4 class="cert-title">🏆 1st Prize – Web Designing (SPYDER National Symposium)</h4>
+                  <p class="cert-desc">Awarded First Rank in National Level Technical Web Design Competition.</p>
+                  <div class="cert-tags">
+                    <span class="cert-tag">★ 1st Prize</span>
+                    <span class="cert-tag">National Winner</span>
+                    <span class="cert-tag">UI/UX Design</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3rd Prize Debugging -->
+              <div class="cert-card prize-card">
+                <div class="cert-logo-box" title="Award Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Hindusthan College Of Arts And Science</span>
+                    <span class="cert-date">Mar 2026</span>
+                  </div>
+                  <h4 class="cert-title">🥉 3rd Prize – Code Debugging Event (SPYDER Symposium)</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">3rd Prize</span>
+                    <span class="cert-tag">Code Debugging</span>
+                    <span class="cert-tag">Algorithms</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- February 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">February 2026</h3>
+            <div class="cert-grid">
+
+              <!-- UGC-NET Qualified -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="National Testing Agency / UGC Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">National Testing Agency (NTA)</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">🎓 UGC-NET – Qualified for Admission to Ph.D. in Computer Science</h4>
+                  <p class="cert-desc">National Eligibility Test Qualification in Computer Science and Applications (Code 087).</p>
+                  <div class="cert-tags">
+                    <span class="cert-tag">UGC-NET</span>
+                    <span class="cert-tag">Ph.D. Qualified</span>
+                    <span class="cert-tag">Computer Science</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Technova Calicut -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="University of Calicut Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">University of Calicut (CCSIT)</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">INSIGHT'26 – TECHNOVA 8.0</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">CCSIT</span>
+                    <span class="cert-tag">Tech Fest</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2nd Prize Genesis -->
+              <div class="cert-card prize-card">
+                <div class="cert-logo-box" title="Trophy / 2nd Prize Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                    <path d="M4 22h16"/>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Nehru College of Management</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">🥈 2nd Prize – Web Designing (GENESIS 2026)</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">2nd Prize</span>
+                    <span class="cert-tag">Web Design</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CodeAlpha Internship -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="CodeAlpha Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">CodeAlpha</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">Data Analytics Virtual Internship Certificate</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Data Analytics</span>
+                    <span class="cert-tag">Internship</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- IBM AI -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="IBM Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2 6h20v2H2V6zm0 5h20v2H2v-2zm0 5h20v2H2v-2z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">IBM</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">AI Fundamentals: Foundations for Understanding AI</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">IBM</span>
+                    <span class="cert-tag">AI Foundations</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HP LIFE -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="HP LIFE Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">HP LIFE</span>
+                    <span class="cert-date">Feb 2026</span>
+                  </div>
+                  <h4 class="cert-title">AI for Beginners</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">HP LIFE</span>
+                    <span class="cert-tag">AI Literacy</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- January 2026 -->
+          <div class="month-block">
+            <h3 class="month-title">January 2026</h3>
+            <div class="cert-grid">
+
+              <!-- Quiz 1st Position -->
+              <div class="cert-card prize-card">
+                <div class="cert-logo-box" title="Award Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="6"/>
+                    <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">SreeKrishnapuram V.T. Bhattathiripad College</span>
+                    <span class="cert-date">Jan 2026</span>
+                  </div>
+                  <h4 class="cert-title">🥇 Quiz Competition First Position (BHAVANA 2025–26)</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">1st Position</span>
+                    <span class="cert-tag">General Quiz</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INKRIT 4.0 -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="MES College Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">MES College Marampally</span>
+                    <span class="cert-date">Jan 2026</span>
+                  </div>
+                  <h4 class="cert-title">INKRIT 4.0 Hackathon</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Hackathon</span>
+                    <span class="cert-tag">Innovation</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== YEAR 2025 ==================== -->
+        <div id="year-2025" class="cert-year-group">
+          <div class="year-header-badge">
+            <span class="year-number">2025</span>
+            <span class="year-line"></span>
+          </div>
+
+          <!-- October 2025 -->
+          <div class="month-block">
+            <h3 class="month-title">October 2025</h3>
+            <div class="cert-grid">
+
+              <!-- Oracle AI Associate -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="Oracle Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 4h-8a8 8 0 000 16h8a8 8 0 000-16zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm8 0c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Oracle</span>
+                    <span class="cert-date">Oct 2025 – Oct 2027</span>
+                  </div>
+                  <h4 class="cert-title">Oracle Cloud Infrastructure 2025 AI Foundations Associate</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Oracle Cloud</span>
+                    <span class="cert-tag">OCI AI</span>
+                    <span class="cert-tag">Certified Associate</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Google Cloud Gemini -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Google Cloud Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Google Cloud Skills Boost</span>
+                    <span class="cert-date">Oct 2025</span>
+                  </div>
+                  <h4 class="cert-title">Gemini For Data Scientists And Analysts</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Google Gemini</span>
+                    <span class="cert-tag">Data Analytics</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HackerRank SQL & Problem Solving -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="HackerRank Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0L1.5 6v12L12 24l10.5-6V6L12 0zm-1.2 17.4H8.4V6.6h2.4v10.8zm4.8 0h-2.4V6.6h2.4v10.8z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">HackerRank</span>
+                    <span class="cert-date">Oct 2025</span>
+                  </div>
+                  <h4 class="cert-title">SQL (Intermediate) & Problem Solving Certificates</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">SQL</span>
+                    <span class="cert-tag">Problem Solving</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- May 2025 -->
+          <div class="month-block">
+            <h3 class="month-title">May 2025</h3>
+            <div class="cert-grid">
+
+              <!-- Intel AI Badges -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Intel Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Intel</span>
+                    <span class="cert-date">May 2025</span>
+                  </div>
+                  <h4 class="cert-title">AI Appreciate & AI Aware Badges (AI For All)</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Intel</span>
+                    <span class="cert-tag">AI For All</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sololearn Python -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="Sololearn Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Sololearn</span>
+                    <span class="cert-date">May 2025</span>
+                  </div>
+                  <h4 class="cert-title">Python Developer & Intro to Python Certification</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">Python</span>
+                    <span class="cert-tag">Developer</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- March 2025 -->
+          <div class="month-block">
+            <h3 class="month-title">March 2025</h3>
+            <div class="cert-grid">
+
+              <!-- IIT Madras NPTEL -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="IIT Madras / NPTEL Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Indian Institute of Technology, Madras (NPTEL)</span>
+                    <span class="cert-date">Mar 2025</span>
+                  </div>
+                  <h4 class="cert-title">Python For Data Science (IIT Madras NPTEL)</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">IIT Madras</span>
+                    <span class="cert-tag">NPTEL</span>
+                    <span class="cert-tag">Data Science</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== YEAR 2024 ==================== -->
+        <div id="year-2024" class="cert-year-group">
+          <div class="year-header-badge">
+            <span class="year-number">2024</span>
+            <span class="year-line"></span>
+          </div>
+
+          <div class="month-block">
+            <h3 class="month-title">2024 Milestones</h3>
+            <div class="cert-grid">
+
+              <!-- TCS iON -->
+              <div class="cert-card highlight-card">
+                <div class="cert-logo-box" title="TCS iON Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">Tata Consultancy Services (TCS iON)</span>
+                    <span class="cert-date">Dec 2024</span>
+                  </div>
+                  <h4 class="cert-title">TCS iON Career Edge – Young Professional</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">TCS iON</span>
+                    <span class="cert-tag">Corporate Skills</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- LBS Python -->
+              <div class="cert-card">
+                <div class="cert-logo-box" title="LBS Centre Logo Slot">
+                  <svg class="provider-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <div class="cert-card-body">
+                  <div class="cert-card-header">
+                    <span class="cert-issuer">LBS Centre For Science & Technology</span>
+                    <span class="cert-date">Aug 2024</span>
+                  </div>
+                  <h4 class="cert-title">Certificate Course in Python Programming</h4>
+                  <div class="cert-tags">
+                    <span class="cert-tag">LBS Centre</span>
+                    <span class="cert-tag">Python</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- E-Ink Floating Footer Container -->
+  <footer class="footer-container">
+    <div class="eink-footer" aria-label="Footer Navigation">
+      <a href="index.html#home" class="footer-brand" aria-label="FNZ Home">
+        <span class="brand-dot"></span>
+        <span>FNZ</span>
+        <span class="brand-tag">78</span>
+      </a>
+      <div class="social-links" aria-label="Social Links">
+        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/k-n-farhan-nazim-402122306/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z" />
+          </svg>
+        </a>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 FNZ</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript Files -->
+  <script src="assets/js/inkflow.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>
