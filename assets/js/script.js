@@ -125,6 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 3. Active Nav Link Handler & Smooth Scrolling ---
+  const currentYearEls = document.querySelectorAll('.current-year');
+  const thisYear = new Date().getFullYear();
+  currentYearEls.forEach(el => {
+    el.textContent = thisYear;
+  });
+
   const backToTopBtns = document.querySelectorAll('.back-to-top-btn');
   backToTopBtns.forEach(btn => {
     btn.addEventListener('click', () => {
