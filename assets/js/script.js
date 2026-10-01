@@ -20,6 +20,70 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- 0. E-Ink Preloader Overlay Controller (1-Second Curve Slider & 0-100% Counter) ---
+  const einkPreloader = document.getElementById('einkPreloader');
+  const preloaderPercent = document.getElementById('preloaderPercent');
+  const preloaderCurveProgress = document.getElementById('preloaderCurveProgress');
+  const preloaderStatusText = document.getElementById('preloaderStatusText');
+
+  if (einkPreloader && preloaderPercent && preloaderCurveProgress) {
+    const totalDuration = 1000; // 1 second total animation duration
+    const startTime = performance.now();
+
+    // Calculate SVG curve total length for accurate stroke fill animation
+    let pathLength = 380;
+    try {
+      pathLength = preloaderCurveProgress.getTotalLength() || 380;
+    } catch (e) {
+      pathLength = 380;
+    }
+
+    preloaderCurveProgress.style.strokeDasharray = pathLength;
+    preloaderCurveProgress.style.strokeDashoffset = pathLength;
+
+    function animatePreloader(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / totalDuration, 1.0);
+
+      // Smooth cubic easing
+      const easedProgress = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      const currentPercent = Math.floor(easedProgress * 100);
+      preloaderPercent.textContent = currentPercent;
+      einkPreloader.setAttribute('aria-valuenow', currentPercent);
+
+      const offset = pathLength * (1 - easedProgress);
+      preloaderCurveProgress.style.strokeDashoffset = offset;
+
+      if (currentPercent > 70 && preloaderStatusText) {
+        preloaderStatusText.textContent = 'RENDERING INTERFACE...';
+      }
+
+      if (progress < 1.0) {
+        requestAnimationFrame(animatePreloader);
+      } else {
+        preloaderPercent.textContent = '100';
+        preloaderCurveProgress.style.strokeDashoffset = 0;
+        if (preloaderStatusText) preloaderStatusText.textContent = 'SYSTEM READY';
+
+        // Trigger signature E-Ink Flash transition on completion
+        setTimeout(() => {
+          if (typeof window.triggerEInkFlash === 'function') {
+            window.triggerEInkFlash();
+          }
+          einkPreloader.classList.add('fade-out');
+          setTimeout(() => {
+            einkPreloader.style.display = 'none';
+          }, 450);
+        }, 120);
+      }
+    }
+
+    requestAnimationFrame(animatePreloader);
+  }
+
   const mobileToggle = document.getElementById('mobileToggle');
   const navLinks = document.getElementById('navLinks');
   const themeToggle = document.getElementById('themeToggle');

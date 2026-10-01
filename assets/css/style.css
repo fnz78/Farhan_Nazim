@@ -1506,6 +1506,140 @@ html {
   fill: var(--ink);
 }
 
+/* ==========================================================================
+   E-Ink Fullscreen Preloader Overlay & Curving Slider Styling
+   ========================================================================== */
+.eink-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--paper);
+  color: var(--ink);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  overflow: hidden;
+  user-select: none;
+}
+
+.eink-preloader.fade-out {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 460px;
+  text-align: center;
+  padding: 2.5rem 1.75rem;
+  background: var(--paper-card);
+  border: 2px solid var(--ink-border);
+  box-shadow: 6px 6px 0px var(--ink);
+  position: relative;
+}
+
+.preloader-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 1.25rem;
+}
+
+.preloader-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--ink);
+  border-radius: 50%;
+  display: inline-block;
+  animation: eink-pulse 1.2s infinite ease-in-out;
+}
+
+.preloader-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.preloader-word {
+  display: block;
+}
+
+.preloader-slider-container {
+  width: 100%;
+  position: relative;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preloader-curve-svg {
+  width: 100%;
+  height: 50px;
+  overflow: visible;
+  color: var(--ink);
+}
+
+.preloader-curve-fill {
+  transition: stroke-dashoffset 0.05s linear;
+}
+
+.preloader-counter {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.percent-symbol {
+  font-size: 1.1rem;
+  opacity: 0.75;
+  margin-left: 0.15rem;
+}
+
+.preloader-status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-indicator {
+  font-size: 0.65rem;
+  color: var(--ink);
+}
+
 
 
 
