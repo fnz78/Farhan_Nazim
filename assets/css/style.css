@@ -1514,7 +1514,7 @@ html {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--paper);
+  background-color: transparent;
   color: var(--ink);
   z-index: 99999;
   display: flex;
@@ -1542,10 +1542,13 @@ html {
   max-width: 460px;
   text-align: center;
   padding: 2.5rem 1.75rem;
-  background: var(--paper-card);
+  background: var(--paper-translucent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 2px solid var(--ink-border);
   box-shadow: 6px 6px 0px var(--ink);
   position: relative;
+  z-index: 2;
 }
 
 .preloader-eyebrow {
