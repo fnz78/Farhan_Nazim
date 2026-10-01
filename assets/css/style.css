@@ -1975,6 +1975,42 @@ html {
   font-size: 1.15rem;
 }
 
+/* Prize Ribbon Medals & Side Badges */
+.cert-card-badge {
+  position: absolute;
+  top: -12px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 2px solid var(--ink-border);
+  box-shadow: 2px 2px 0px var(--ink);
+  letter-spacing: 0.05em;
+  background: var(--paper);
+  color: var(--ink);
+  z-index: 5;
+}
+
+.gold-badge {
+  background: var(--paper-card);
+}
+
+.silver-badge {
+  background: var(--paper-card);
+}
+
+.bronze-badge {
+  background: var(--paper-card);
+}
+
+.prize-medal-svg {
+  width: 36px;
+  height: 36px;
+  color: var(--ink);
+}
+
 
 
 
