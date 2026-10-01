@@ -1,6 +1,24 @@
 /**
  * E-Ink Navbar, Contact Form & Portfolio Interactive Script
  */
+
+// --- HTTP Protection: Enforce HTTPS in Production ---
+(function enforceHTTPS() {
+  if (
+    window.location.protocol === 'http:' &&
+    !['localhost', '127.0.0.1', '::1'].includes(window.location.hostname) &&
+    !window.location.hostname.endsWith('.local')
+  ) {
+    window.location.replace(
+      'https://' +
+        window.location.host +
+        window.location.pathname +
+        window.location.search +
+        window.location.hash
+    );
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobileToggle');
   const navLinks = document.getElementById('navLinks');
@@ -280,6 +298,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- XSS Security Sanitization Utility ---
+  function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/`/g, '&#96;');
+  }
+
   // --- 7. E-Ink Tech Stack Marquee Populator ---
   const marqueeTrack = document.querySelector('.eink-marquee-track');
   if (marqueeTrack && window.TECH_STACK_ICONS) {
@@ -309,14 +339,21 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: 'REST API', icon: window.TECH_STACK_ICONS.restapi }
     ];
 
-    const createSet = (items) => items.map(item => `
-      <div class="tech-marquee-item" data-tooltip="${item.name}" aria-label="${item.name}">
-        ${item.icon || ''}
-      </div>
-    `).join('');
+    const fragment = document.createDocumentFragment();
 
-    const htmlContent = createSet(techItems);
-    marqueeTrack.innerHTML = htmlContent + htmlContent;
+    // Duplicate set to create seamless infinite scrolling loop
+    [...techItems, ...techItems].forEach(item => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'tech-marquee-item';
+      itemEl.setAttribute('data-tooltip', escapeHTML(item.name));
+      itemEl.setAttribute('aria-label', escapeHTML(item.name));
+      if (item.icon) {
+        itemEl.innerHTML = item.icon;
+      }
+      fragment.appendChild(itemEl);
+    });
+
+    marqueeTrack.replaceChildren(fragment);
   }
 });
 
