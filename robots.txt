@@ -1,0 +1,6 @@
+# User-agent configuration
+User-agent: *
+Allow: /
+
+# Sitemap Indexing
+Sitemap: https://farhannazim.vercel.app/sitemap.xml
