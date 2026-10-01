@@ -125,11 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 6. Formspree Contact Form Validation & AJAX Handler ---
+  // --- 6. Formspree Contact Form Security, Sanitization & Validation Handler ---
   if (contactForm) {
     const submitBtn = contactForm.querySelector('[data-fs-submit-btn]');
     const successBanner = document.getElementById('formSuccessBanner');
     const errorBanner = document.getElementById('formErrorBanner');
+    const formRenderTime = Date.now();
+    const SUBMIT_COOLDOWN_MS = 45000; // 45-second rate limit guard per client
+
+    function sanitizeInput(str) {
+      if (typeof str !== 'string') return '';
+      // Strip HTML tags & control characters to eliminate XSS payload injection
+      return str.replace(/<[^>]*>?/gm, '').trim();
+    }
 
     function showError(fieldId, message) {
       const errorSpan = contactForm.querySelector(`[data-fs-error="${fieldId}"]`);
@@ -167,19 +175,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // RFC 5322 compliant regex preventing email header injections & bad formatting
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       return re.test(String(email).toLowerCase());
+    }
+
+    function validateName(name) {
+      // Allow letters, spaces, hyphens, dots, apostrophes; min 2, max 70
+      const re = /^[a-zA-Z\s\.\-']{2,70}$/;
+      return re.test(name);
     }
 
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearAllErrors();
 
-      // Honeypot spam check
+      // Security Check 1: Honeypot Anti-Spam (Bots auto-fill hidden input)
       const gotcha = contactForm.querySelector('input[name="_gotcha"]');
       if (gotcha && gotcha.value !== '') {
-        // Silent drop for automated bots
+        return; // Silent drop for automated bots
+      }
+
+      // Security Check 2: Automated Bot Load-Time Threshold (< 1.5 seconds from page render)
+      if (Date.now() - formRenderTime < 1500) {
+        if (errorBanner) {
+          errorBanner.style.display = 'block';
+          errorBanner.textContent = 'Automated submission detected. Please wait a moment and try again.';
+        }
         return;
+      }
+
+      // Security Check 3: Client Rate-Limiting / Submission Cooldown Guard
+      const lastSubmit = localStorage.getItem('fnz_form_last_sub');
+      if (lastSubmit) {
+        const timeElapsed = Date.now() - parseInt(lastSubmit, 10);
+        if (timeElapsed < SUBMIT_COOLDOWN_MS) {
+          const remainingSec = Math.ceil((SUBMIT_COOLDOWN_MS - timeElapsed) / 1000);
+          if (errorBanner) {
+            errorBanner.style.display = 'block';
+            errorBanner.textContent = `Security Rate Limit: Please wait ${remainingSec} second(s) before sending another message.`;
+          }
+          return;
+        }
       }
 
       const nameInput = document.getElementById('name');
@@ -188,33 +225,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let isValid = true;
 
+      // Extract & Sanitize raw inputs
+      const rawName = nameInput ? nameInput.value : '';
+      const rawEmail = emailInput ? emailInput.value : '';
+      const rawMessage = messageInput ? messageInput.value : '';
+
+      const nameVal = sanitizeInput(rawName);
+      const emailVal = sanitizeInput(rawEmail);
+      const messageVal = sanitizeInput(rawMessage);
+
       // Validate Name
-      const nameVal = nameInput ? nameInput.value.trim() : '';
       if (!nameVal) {
         showError('name', 'Please enter your name.');
         isValid = false;
       } else if (nameVal.length < 2) {
         showError('name', 'Name must be at least 2 characters.');
         isValid = false;
+      } else if (nameVal.length > 70) {
+        showError('name', 'Name must not exceed 70 characters.');
+        isValid = false;
+      } else if (!validateName(nameVal)) {
+        showError('name', 'Name contains invalid or dangerous characters.');
+        isValid = false;
       }
 
       // Validate Email
-      const emailVal = emailInput ? emailInput.value.trim() : '';
       if (!emailVal) {
         showError('email', 'Please enter your email address.');
         isValid = false;
+      } else if (emailVal.length > 100) {
+        showError('email', 'Email address is too long.');
+        isValid = false;
       } else if (!validateEmail(emailVal)) {
-        showError('email', 'Please enter a valid email address.');
+        showError('email', 'Please enter a valid email address (e.g. name@example.com).');
         isValid = false;
       }
 
       // Validate Message
-      const messageVal = messageInput ? messageInput.value.trim() : '';
       if (!messageVal) {
         showError('message', 'Please write a message.');
         isValid = false;
       } else if (messageVal.length < 10) {
         showError('message', 'Message should be at least 10 characters long.');
+        isValid = false;
+      } else if (messageVal.length > 2000) {
+        showError('message', 'Message must not exceed 2000 characters.');
         isValid = false;
       }
 
@@ -225,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Prepare AJAX Submission to Formspree
+      // Prepare Secure AJAX Submission Payload
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.classList.add('sending');
@@ -235,7 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
 
-      const formData = new FormData(contactForm);
+      const cleanFormData = new FormData();
+      cleanFormData.append('name', nameVal);
+      cleanFormData.append('email', emailVal);
+      cleanFormData.append('message', messageVal);
+      cleanFormData.append('_subject', 'Portfolio Contact Message from ' + nameVal);
+
       const formEndpoint = (typeof window !== 'undefined' && window.ENV && window.ENV.FORMSPREE_ENDPOINT)
         || contactForm.getAttribute('action')
         || 'https://formspree.io/f/mdekbvjj';
@@ -243,14 +303,15 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const response = await fetch(formEndpoint, {
           method: 'POST',
-          body: formData,
+          body: cleanFormData,
           headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
           }
         });
 
         if (response.ok) {
-          // Success Feedback
+          localStorage.setItem('fnz_form_last_sub', Date.now().toString());
           if (typeof window.triggerEInkFlash === 'function') {
             window.triggerEInkFlash();
           }
@@ -261,9 +322,9 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } else {
           const data = await response.json();
-          let errText = 'Submission error. Please check fields and try again.';
-          if (Object.hasOwn(data, 'errors')) {
-            errText = data.errors.map(err => err.message).join(', ');
+          let errText = 'Submission error. Please verify your entries and try again.';
+          if (data && Array.isArray(data.errors)) {
+            errText = data.errors.map(err => sanitizeInput(err.message)).join(', ');
           }
           if (errorBanner) {
             errorBanner.style.display = 'block';
