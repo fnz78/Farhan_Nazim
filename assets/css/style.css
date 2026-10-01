@@ -267,6 +267,14 @@ body:not(.flash) .eink-footer {
   stroke-linejoin: round;
 }
 
+.scroll-down-icon {
+  transform: rotate(180deg);
+}
+
+.back-to-top-btn, .scroll-bottom-btn {
+  padding: 0.4rem 0.6rem;
+}
+
 /* Status indicator (E-ink Battery / Screen stats) */
 .eink-status {
   font-family: var(--font-mono);

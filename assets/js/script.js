@@ -125,6 +125,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 3. Active Nav Link Handler & Smooth Scrolling ---
+  const backToTopBtns = document.querySelectorAll('.back-to-top-btn');
+  backToTopBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  const scrollBottomBtns = document.querySelectorAll('.scroll-bottom-btn');
+  scrollBottomBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+  });
+
   linkElements.forEach(link => {
     link.addEventListener('click', function (e) {
       linkElements.forEach(l => l.classList.remove('active'));
