@@ -2,7 +2,7 @@
   "name": "KN Farhan Nazim Portfolio",
   "short_name": "FNZ Portfolio",
   "description": "Minimalist E-Ink portfolio featuring fluid ink animations, accredited certifications, and technical projects by KN Farhan Nazim.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1c1c1a",
   "theme_color": "#1c1c1a",
