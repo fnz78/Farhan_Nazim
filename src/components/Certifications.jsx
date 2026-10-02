@@ -99,7 +99,7 @@ export const Certifications = ({ onBack }) => {
             {
               issuer: 'Hindusthan College Of Arts And Science',
               date: 'Mar 2026',
-              title: '🏆 1st Prize – Web Designing (SPYDER National Symposium)',
+              title: ' 🥇 1st Prize – Web Designing (SPYDER National Symposium)',
               desc: 'Awarded First Rank in National Level Technical Web Design Competition.',
               tags: ['★ 1st Prize Winner', 'National Winner', 'UI/UX Design'],
               prize: '🥇 1st Prize',

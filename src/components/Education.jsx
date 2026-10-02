@@ -5,15 +5,10 @@ export const Education = () => {
     {
       period: '2024 — 2026',
       degree: 'Master of Science (MSc) in Computer Science',
-      institution: 'Sreekrishnapuram V. T. Bhattathiripad College (VTBB College)',
+      institution: 'VTB College',
       university: 'Affiliated to Calicut University',
       cgpa: '4.18 / 5.0',
       badge: 'POSTGRADUATE',
-      highlights: [
-        'Specialization in Advanced Machine Learning & Autonomous Systems',
-        'Key coursework in Data Structures, AI Algorithms & Systems Architecture',
-        'Academic Resource Person & Speaker on Multi-Agent Orchestration'
-      ]
     },
     {
       period: '2021 — 2024',
@@ -22,11 +17,7 @@ export const Education = () => {
       university: 'Affiliated to Calicut University',
       cgpa: '7.76 / 10.0',
       badge: 'GRADUATE',
-      highlights: [
-        'Foundational Mastery in Object-Oriented Programming, C, Python & Java',
-        'Database Management Systems (MySQL & SQLite) & Software Engineering',
-        'National Level Web Design & Coding Championship Prize Winner'
-      ]
+
     }
   ];
 
