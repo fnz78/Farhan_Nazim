@@ -65,6 +65,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 html,
@@ -80,6 +81,8 @@ body {
   overscroll-behavior-x: hidden;
   overscroll-behavior-y: auto;
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Canvas Background */
@@ -227,6 +230,7 @@ body:not(.flash) .eink-footer {
   padding: 0.45rem 0.85rem;
   border-radius: 9999px;
   transition: color 0.15s steps(2), background-color 0.15s steps(2);
+  touch-action: manipulation;
 }
 
 .nav-link:hover {
@@ -267,6 +271,7 @@ body:not(.flash) .eink-footer {
   gap: 0.35rem;
   transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
   user-select: none;
+  touch-action: manipulation;
 }
 
 .eink-btn:active {

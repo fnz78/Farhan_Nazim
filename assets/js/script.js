@@ -124,55 +124,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 3. Active Nav Link Handler & Smooth Scrolling ---
+  // --- 3. Active Nav Link Handler & High-Performance Smooth Scrolling ---
   const currentYearEls = document.querySelectorAll('.current-year');
   const thisYear = new Date().getFullYear();
   currentYearEls.forEach(el => {
     el.textContent = thisYear;
   });
 
+  // Smooth scroll handler for back-to-top buttons
   const backToTopBtns = document.querySelectorAll('.back-to-top-btn');
   backToTopBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 
+  // Smooth scroll handler for scroll-to-bottom buttons
   const scrollBottomBtns = document.querySelectorAll('.scroll-bottom-btn');
   scrollBottomBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
   });
 
-  linkElements.forEach(link => {
+  // Smooth scroll handler for all internal anchor links (e.g. #about, #projects, #contact)
+  const internalLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+  internalLinks.forEach(link => {
     link.addEventListener('click', function (e) {
-      linkElements.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      if (navLinks) {
-        navLinks.classList.remove('open');
-        if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        if (this.classList.contains('nav-link')) {
+          linkElements.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        }
+
+        if (navLinks && navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        }
       }
     });
   });
 
-  // Highlight active nav item on scroll
+  // Zero-lag IntersectionObserver for active section highlighting on scroll
   const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    sections.forEach(current => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 120;
-      const sectionId = current.getAttribute('id');
-      const navItem = document.querySelector(`.nav-link[href*="${sectionId}"]`);
+  if (sections.length > 0 && 'IntersectionObserver' in window) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
 
-      if (navItem && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        linkElements.forEach(l => l.classList.remove('active'));
-        navItem.classList.add('active');
-      }
-    });
-  }, { passive: true });
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          linkElements.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.includes(sectionId)) {
+              linkElements.forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => sectionObserver.observe(section));
+  } else {
+    // Fallback scroll listener for older browser engines
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 120;
+        const sectionId = current.getAttribute('id');
+        const navItem = document.querySelector(`.nav-link[href*="${sectionId}"]`);
+
+        if (navItem && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          linkElements.forEach(l => l.classList.remove('active'));
+          navItem.classList.add('active');
+        }
+      });
+    }, { passive: true });
+  }
 
   // --- 4. Dark/Light Theme Toggle ---
   if (themeToggle) {
