@@ -3,10 +3,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/robots.txt", "destination": "/seo/robots.txt" },
-    { "source": "/sitemap.xml", "destination": "/seo/sitemap.xml" },
-    { "source": "/site.webmanifest", "destination": "/seo/site.webmanifest" },
-    { "source": "/manifest.json", "destination": "/seo/manifest.json" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
