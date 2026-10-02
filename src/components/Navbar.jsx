@@ -120,15 +120,6 @@ export const Navbar = ({ currentPage, setCurrentPage, activeSection }) => {
           </li>
           <li>
             <a
-              href="#certifications"
-              onClick={handleCertClick}
-              className={`nav-link ${currentPage === 'certifications' ? 'active' : ''}`}
-            >
-              Certifications
-            </a>
-          </li>
-          <li>
-            <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
               className={`nav-link ${currentPage === 'home' && activeSection === 'contact' ? 'active' : ''}`}
@@ -139,10 +130,10 @@ export const Navbar = ({ currentPage, setCurrentPage, activeSection }) => {
         </ul>
 
         <div className="nav-controls">
-          {/* Certifications Page Switcher Button */}
+          {/* Certifications Page Switcher Button - SVG Vector Badge Only */}
           <button
             onClick={handleCertClick}
-            className="eink-btn nav-cert-btn"
+            className={`eink-btn nav-cert-btn ${currentPage === 'certifications' ? 'active' : ''}`}
             title="View Certifications & Timeline"
             aria-label="View Certifications & Timeline"
           >
@@ -155,7 +146,6 @@ export const Navbar = ({ currentPage, setCurrentPage, activeSection }) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="btn-text-desktop">Certs</span>
           </button>
 
           {/* Theme Toggle Button */}
