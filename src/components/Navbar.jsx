@@ -102,6 +102,15 @@ export const Navbar = ({ currentPage, setCurrentPage, activeSection }) => {
           </li>
           <li>
             <a
+              href="#education"
+              onClick={(e) => handleNavClick(e, '#education')}
+              className={`nav-link ${currentPage === 'home' && activeSection === 'education' ? 'active' : ''}`}
+            >
+              Education
+            </a>
+          </li>
+          <li>
+            <a
               href="#projects"
               onClick={(e) => handleNavClick(e, '#projects')}
               className={`nav-link ${currentPage === 'home' && activeSection === 'projects' ? 'active' : ''}`}

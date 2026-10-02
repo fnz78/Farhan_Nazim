@@ -4,6 +4,7 @@ import { InkflowCanvas } from './components/InkflowCanvas';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
+import { Education } from './components/Education';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -47,7 +48,7 @@ export function App() {
       {/* Fullscreen E-Ink Loading Preloader */}
       <Preloader />
 
-      {/* High-Performance Canvas E-Ink Fluid Background */}
+      {/* High-Performance Static E-Ink Background */}
       <InkflowCanvas />
 
       {/* Floating E-Ink Glassmorphism Navbar */}
@@ -62,6 +63,7 @@ export function App() {
         <main className="main-content">
           <Hero onNavigate={handleNavigate} />
           <About />
+          <Education />
           <Projects />
           <Contact />
         </main>
