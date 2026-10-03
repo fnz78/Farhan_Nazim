@@ -562,5 +562,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     marqueeTrack.replaceChildren(fragment);
   }
+
+  // --- 8. Interactive Piano Keys Hover & Wave Ripple Animation ---
+  const pianoKeys = document.querySelectorAll('.piano-key');
+  pianoKeys.forEach((key, index, keysList) => {
+    function activateKey() {
+      key.classList.add('active-key');
+      if (keysList[index - 1]) keysList[index - 1].classList.add('neighbor-left');
+      if (keysList[index + 1]) keysList[index + 1].classList.add('neighbor-right');
+
+      // Haptic vibration feedback for touch devices
+      if (navigator.vibrate && 'ontouchstart' in window) {
+        try { navigator.vibrate(6); } catch (e) {}
+      }
+    }
+
+    function deactivateKey() {
+      key.classList.remove('active-key');
+      if (keysList[index - 1]) keysList[index - 1].classList.remove('neighbor-left');
+      if (keysList[index + 1]) keysList[index + 1].classList.remove('neighbor-right');
+    }
+
+    key.addEventListener('mouseenter', activateKey);
+    key.addEventListener('mouseleave', deactivateKey);
+
+    // Touch events for mobile swiping / tapping across letter keys
+    key.addEventListener('touchstart', (e) => {
+      activateKey();
+    }, { passive: true });
+
+    key.addEventListener('touchend', deactivateKey);
+    key.addEventListener('touchcancel', deactivateKey);
+  });
 });
 
