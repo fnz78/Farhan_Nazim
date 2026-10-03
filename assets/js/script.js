@@ -19,6 +19,38 @@
   }
 })();
 
+// --- Instant Theme Initialization (Prevents FOUC) ---
+(function initTheme() {
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+})();
+
+// --- Global E-Ink Transition Flash Function ---
+window.triggerEInkFlash = function () {
+  let overlay = document.getElementById('einkFlashOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'einkFlashOverlay';
+    overlay.className = 'eink-flash-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  overlay.classList.remove('active');
+  void overlay.offsetWidth; // Trigger DOM reflow to restart animation
+  overlay.classList.add('active');
+
+  // Haptic feedback vibration for mobile devices
+  if (navigator.vibrate && 'ontouchstart' in window) {
+    try { navigator.vibrate([6, 18, 6]); } catch (e) {}
+  }
+
+  setTimeout(() => {
+    overlay.classList.remove('active');
+  }, 420);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- 0. E-Ink Preloader Overlay Controller (1-Second Curve Slider & 0-100% Counter) ---
   const einkPreloader = document.getElementById('einkPreloader');
