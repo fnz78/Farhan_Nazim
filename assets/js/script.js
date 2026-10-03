@@ -157,19 +157,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Highlight active nav item on scroll
-  const sections = document.querySelectorAll('section[id]');
+  // --- E-Ink Top Scroll Progress Line & Touch Haptics ---
+  let progressBar = document.getElementById('einkScrollProgress');
+  if (!progressBar) {
+    progressBar = document.createElement('div');
+    progressBar.id = 'einkScrollProgress';
+    progressBar.className = 'eink-scroll-progress';
+    document.body.appendChild(progressBar);
+  }
+
+  // Highlight active nav item on scroll & update progress line
+  const sections = document.querySelectorAll('section[id], .cert-year-group[id]');
+  let lastActiveSection = '';
+
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (progressBar && totalHeight > 0) {
+      const progress = Math.min((scrollY / totalHeight) * 100, 100);
+      progressBar.style.width = progress + '%';
+    }
+
     sections.forEach(current => {
       const sectionHeight = current.offsetHeight;
       const sectionTop = current.offsetTop - 120;
       const sectionId = current.getAttribute('id');
       const navItem = document.querySelector(`.nav-link[href*="${sectionId}"]`);
 
-      if (navItem && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        linkElements.forEach(l => l.classList.remove('active'));
-        navItem.classList.add('active');
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        if (navItem) {
+          linkElements.forEach(l => l.classList.remove('active'));
+          navItem.classList.add('active');
+        }
+        if (lastActiveSection !== sectionId) {
+          lastActiveSection = sectionId;
+          // Touch haptic feedback vibration for section transition on mobile
+          if (navigator.vibrate && 'ontouchstart' in window) {
+            try { navigator.vibrate(6); } catch (e) {}
+          }
+        }
       }
     });
   }, { passive: true });

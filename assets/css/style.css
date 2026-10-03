@@ -65,6 +65,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-muted) var(--paper);
 }
 
 html,
@@ -77,8 +79,56 @@ body {
   background-color: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
-  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   E-Ink Custom Scrollbar (Desktop & Mobile, All Browsers)
+   ========================================================================== */
+
+/* WebKit (Chrome, Safari, Edge, Opera, iOS) Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+  border-left: 1.5px solid var(--ink-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-muted);
+  border-radius: 9999px;
+  border: 2px solid var(--paper);
+  box-shadow: inset 0 0 0 1px var(--ink-border);
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--paper);
+}
+
+/* E-Ink Floating Scroll Progress Line */
+.eink-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--ink);
+  z-index: 1001;
+  transition: width 0.08s ease-out;
+  pointer-events: none;
 }
 
 /* Canvas Background */
