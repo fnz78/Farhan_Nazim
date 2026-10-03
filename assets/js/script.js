@@ -236,6 +236,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 4. Dark/Light Theme Toggle ---
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
+      // Trigger squishy wiggly physics animation
+      themeToggle.classList.remove('squishy-active');
+      void themeToggle.offsetWidth; // Force DOM reflow to restart keyframe animation
+      themeToggle.classList.add('squishy-active');
+
+      setTimeout(() => {
+        themeToggle.classList.remove('squishy-active');
+      }, 560);
+
       const currentTheme = document.documentElement.getAttribute('data-theme');
       let newTheme = 'dark';
 
