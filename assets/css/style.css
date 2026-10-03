@@ -2222,7 +2222,8 @@ html {
 .hero-name-primary,
 .hero-name-secondary {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   align-items: center;
 }
 
