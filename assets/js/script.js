@@ -163,6 +163,48 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = thisYear;
   });
 
+  // --- Universal Squishy Wiggly Physics Trigger ---
+  window.triggerSquishyAnimation = function (el) {
+    if (!el) return;
+    el.classList.remove('squishy-active');
+    void el.offsetWidth; // Force DOM reflow to restart CSS keyframe animation
+    el.classList.add('squishy-active');
+    setTimeout(() => {
+      el.classList.remove('squishy-active');
+    }, 560);
+  };
+
+  const interactiveElementsSelector = `
+    .hero-btn,
+    .social-icon-btn,
+    .hero-social-link,
+    .cert-back-link,
+    .year-chip,
+    .filter-tab,
+    .project-action-btn,
+    .eink-btn,
+    .eink-theme-toggle,
+    .nav-brand,
+    .footer-brand,
+    .nav-link
+  `;
+
+  // Global event delegation for click and tap squishy wiggly physics animation
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest(interactiveElementsSelector);
+    if (target) {
+      window.triggerSquishyAnimation(target);
+    }
+  });
+
+  // Touch device haptics
+  document.addEventListener('touchstart', (e) => {
+    const target = e.target.closest(interactiveElementsSelector);
+    if (target && navigator.vibrate && 'ontouchstart' in window) {
+      try { navigator.vibrate(6); } catch (err) {}
+    }
+  }, { passive: true });
+
   const backToTopBtns = document.querySelectorAll('.back-to-top-btn');
   backToTopBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -237,13 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       // Trigger squishy wiggly physics animation
-      themeToggle.classList.remove('squishy-active');
-      void themeToggle.offsetWidth; // Force DOM reflow to restart keyframe animation
-      themeToggle.classList.add('squishy-active');
-
-      setTimeout(() => {
-        themeToggle.classList.remove('squishy-active');
-      }, 560);
+      triggerSquishyAnimation(themeToggle);
 
       const currentTheme = document.documentElement.getAttribute('data-theme');
       let newTheme = 'dark';
@@ -603,5 +639,28 @@ document.addEventListener('DOMContentLoaded', () => {
     key.addEventListener('touchend', deactivateKey);
     key.addEventListener('touchcancel', deactivateKey);
   });
+
+  // --- 9. Projects Page Category Filter Handler ---
+  const filterTabs = document.querySelectorAll('[data-project-filter]');
+  const projectCards = document.querySelectorAll('[data-project-category]');
+
+  if (filterTabs.length > 0 && projectCards.length > 0) {
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.getAttribute('data-project-filter');
+        projectCards.forEach(card => {
+          const categories = card.getAttribute('data-project-category') || '';
+          if (filter === 'all' || categories.includes(filter)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
 });
 

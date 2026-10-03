@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Projects & Repositories | KN FARHAN NAZIM</title>
+  <meta name="description"
+    content="Software engineering projects, AI/ML models, open-source tools, and web applications by KN Farhan Nazim.">
+  <!-- Security Headers & Content Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formspree.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests;">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- Fullscreen E-Ink Loading Preloader -->
+  <div id="einkPreloader" class="eink-preloader" aria-label="Loading Website" role="progressbar" aria-valuenow="0"
+    aria-valuemin="0" aria-valuemax="100">
+    <div class="preloader-content">
+      <div class="preloader-eyebrow">
+        <span class="preloader-dot"></span>
+        <span>KN FARHAN NAZIM // REPOSITORIES</span>
+      </div>
+      <div class="preloader-title">
+        <span class="preloader-word">PRO-</span>
+        <span class="preloader-word">JECTS</span>
+      </div>
+      <div class="preloader-slider-container">
+        <svg class="preloader-curve-svg" viewBox="0 0 400 60" preserveAspectRatio="none">
+          <path class="preloader-curve-bg" d="M 10 30 Q 100 5, 200 30 T 390 30" fill="none" stroke="currentColor"
+            stroke-width="2.5" opacity="0.25" />
+          <path id="preloaderCurveProgress" class="preloader-curve-fill" d="M 10 30 Q 100 5, 200 30 T 390 30"
+            fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+        </svg>
+        <div class="preloader-counter">
+          <span id="preloaderPercent">0</span><span class="percent-symbol">%</span>
+        </div>
+      </div>
+      <div class="preloader-status">
+        <span class="status-indicator">●</span>
+        <span id="preloaderStatusText">INITIALIZING SYSTEM...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-Ink Floating Navbar Container -->
+  <header class="navbar-container">
+    <nav class="eink-navbar" aria-label="Main Navigation">
+
+      <!-- Brand Logo / Monogram -->
+      <a href="index.html" class="nav-brand" aria-label="Home">
+        <span class="brand-dot"></span>
+        <span>FNZ</span>
+        <span class="brand-tag">78</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="education.html" class="nav-link">Education</a></li>
+        <li><a href="projects.html" class="nav-link active">Projects</a></li>
+        <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right Controls & Status -->
+      <div class="nav-controls">
+
+        <!-- Scroll to Bottom Button -->
+        <button class="eink-btn scroll-bottom-btn" title="Scroll to Bottom" aria-label="Scroll to Bottom">
+          <svg class="eink-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M19 12l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Theme Toggle Switch Button -->
+        <button id="themeToggle" class="eink-theme-toggle" title="Toggle Light/Dark Theme"
+          aria-label="Toggle Light/Dark Theme">
+          <span class="theme-toggle-thumb"></span>
+          <svg class="theme-toggle-icon light-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="currentColor"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+              fill="currentColor"></path>
+          </svg>
+          <svg class="theme-toggle-icon dark-icon" viewBox="0 0 48 48" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M14,24A10,10,0,0,0,24,34V14A10,10,0,0,0,14,24Z"></path>
+            <path
+              d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2ZM6,24A18.1,18.1,0,0,1,24,6v8a10,10,0,0,1,0,20v8A18.1,18.1,0,0,1,6,24Z">
+            </path>
+          </svg>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    <div class="main-container">
+
+      <!-- Page Header Section (Unified UI with Education & Certifications) -->
+      <section class="portfolio-section cert-hero-section">
+        <div class="cert-hero-container">
+
+          <div class="cert-back-bar">
+            <a href="index.html" class="cert-back-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back</span>
+            </a>
+          </div>
+
+          <h1 class="hero-title cert-page-title">
+            <span class="hero-name-primary">PROJECTS &</span>
+            <span class="hero-name-secondary">REPOSITORIES</span>
+          </h1>
+
+          <p class="section-subtitle" style="margin-top: 0.75rem; margin-bottom: 1.5rem;">A dedicated archive of
+            software engineering projects, open-source GitHub repositories, AI/ML systems, and web applications.</p>
+
+          <!-- Category Filter Tabs -->
+          <div class="projects-filter-bar" role="tablist" aria-label="Project Category Filter"
+            style="margin-bottom: 0;">
+            <button class="filter-tab active" data-project-filter="all" role="tab" aria-selected="true">ALL
+              PROJECTS</button>
+            <button class="filter-tab" data-project-filter="systems" role="tab" aria-selected="false">SYSTEMS &
+              AI</button>
+            <button class="filter-tab" data-project-filter="web" role="tab" aria-selected="false">WEB & APPS</button>
+            <button class="filter-tab" data-project-filter="tools" role="tab" aria-selected="false">TOOLS &
+              UTILITIES</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Projects Grid Container -->
+      <div class="projects-page-grid" id="projectsGrid">
+
+        <!-- ===================================================================
+             PROJECT CARD 1 (TEMPLATE READY FOR YOUR CONTENT)
+             =================================================================== -->
+        <article class="project-card-item" data-project-category="web systems">
+
+          <!-- Card Header: Category & Action Buttons -->
+          <div class="project-card-header">
+            <span class="project-category-tag">WEB / ANIMATION</span>
+            <div class="project-action-btns">
+              <!-- GitHub Repo Link -->
+              <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="project-action-btn"
+                title="View Source Code on GitHub">
+                <svg class="project-btn-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GITHUB</span>
+              </a>
+
+              <!-- Live Demo Link (Remove if project has no live demo) -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="project-action-btn demo-btn"
+                title="View Live Interactive Demo">
+                <svg class="project-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
+                <span>LIVE DEMO</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project Title & One-Liner Description -->
+          <h2 class="project-card-title">E-Ink Fluid Motion Engine</h2>
+          <p class="project-card-oneliner">Interactive canvas-based fluid ink dynamics optimized for monochrome displays
+            and graphics rendering.</p>
+
+          <!-- Small UI / Screenshot Slot (Replace placeholder div with <img class="project-ui-img" src="..."> if available) -->
+          <div class="project-ui-slot">
+            <div class="project-ui-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              <span>UI SCREENSHOT PREVIEW</span>
+            </div>
+          </div>
+
+          <!-- Tools Used Tags -->
+          <div class="project-tech-tags">
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">HTML5 Canvas</span>
+            <span class="tech-tag">CSS Systems</span>
+          </div>
+        </article>
+
+
+        <!-- ===================================================================
+             PROJECT CARD 2 (TEMPLATE READY FOR YOUR CONTENT)
+             =================================================================== -->
+        <article class="project-card-item" data-project-category="systems tools">
+
+          <div class="project-card-header">
+            <span class="project-category-tag">SYSTEMS / SOFTWARE</span>
+            <div class="project-action-btns">
+              <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="project-action-btn"
+                title="View Source Code on GitHub">
+                <svg class="project-btn-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GITHUB</span>
+              </a>
+            </div>
+          </div>
+
+          <h2 class="project-card-title">Algorithmic Trade Strategy Backtester</h2>
+          <p class="project-card-oneliner">High-throughput python backtesting system for quantitative market indicators
+            and strategy evaluation.</p>
+
+          <div class="project-ui-slot">
+            <div class="project-ui-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              <span>UI SCREENSHOT PREVIEW</span>
+            </div>
+          </div>
+
+          <div class="project-tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Pandas</span>
+          </div>
+        </article>
+
+
+        <!-- ===================================================================
+             PROJECT CARD 3 (TEMPLATE READY FOR YOUR CONTENT)
+             =================================================================== -->
+        <article class="project-card-item" data-project-category="systems">
+
+          <div class="project-card-header">
+            <span class="project-category-tag">AI / MACHINE LEARNING</span>
+            <div class="project-action-btns">
+              <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="project-action-btn"
+                title="View Source Code on GitHub">
+                <svg class="project-btn-icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GITHUB</span>
+              </a>
+            </div>
+          </div>
+
+          <h2 class="project-card-title">Computer Vision Motion Detector</h2>
+          <p class="project-card-oneliner">Real-time object detection and spatial boundary surveillance framework built
+            with OpenCV.</p>
+
+          <div class="project-ui-slot">
+            <div class="project-ui-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              <span>UI SCREENSHOT PREVIEW</span>
+            </div>
+          </div>
+
+          <div class="project-tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">Machine Learning</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Bottom GitHub Redirect CTA -->
+      <div style="text-align: center; margin-top: 3.5rem; margin-bottom: 2rem;">
+        <p class="section-subtitle" style="margin-bottom: 1.25rem;">Want to explore all open-source repositories and
+          code contributions?</p>
+        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="hero-btn primary-btn"
+          style="display: inline-flex;">
+          <svg class="project-btn-icon" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          <span>VIEW GITHUB REPOSITORIES (@FNZ78)</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- E-Ink Floating Footer Container -->
+  <footer class="footer-container">
+    <div class="eink-footer">
+
+      <!-- Footer Brand -->
+      <a href="index.html" class="footer-brand" aria-label="Home">
+        <span class="brand-dot"></span>
+        <span>FNZ</span>
+      </a>
+
+      <!-- Social Media Icons Bar -->
+      <div class="social-links">
+        <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
+          aria-label="GitHub Profile" data-tooltip="GitHub">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+        </a>
+
+        <a href="https://linkedin.com/in/fnz78" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
+          aria-label="LinkedIn Profile" data-tooltip="LinkedIn">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
+
+        <a href="mailto:farhannazim786@gmail.com" class="social-icon-btn" aria-label="Send Email" data-tooltip="Email">
+          <svg class="social-icon" viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Footer Metadata / Copyright -->
+      <div class="footer-meta">
+        © <span class="current-year">2026</span> FNZ
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/techstack.js"></script>
+  <script src="assets/js/script.js"></script>
+
+</body>
+
+</html>
