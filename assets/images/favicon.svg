@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#262624"/>
+      <stop offset="100%" stop-color="#141412"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Outer Frame -->
+  <rect width="100" height="100" rx="22" fill="url(#bg)" stroke="#3a3a36" stroke-width="2"/>
+
+  <!-- Active Status Dot -->
+  <circle cx="24" cy="24" r="5.5" fill="#eab308"/>
+  <circle cx="24" cy="24" r="9" fill="none" stroke="#eab308" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- FNZ Monogram Typography -->
+  <text x="50" y="58" font-family="'JetBrains Mono', 'Space Grotesk', monospace, sans-serif" font-weight="900" font-size="32" fill="#e4e4df" text-anchor="middle" dominant-baseline="central" letter-spacing="-1.5">FNZ</text>
+
+  <!-- Bottom Accent Bar -->
+  <rect x="20" y="78" width="60" height="4" rx="2" fill="url(#accent)"/>
+</svg>

@@ -798,5 +798,379 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // --- 11. Interactive E-Ink Floral & Star Background Animation Engine ---
+  (function initEInkFloralBackground() {
+    let canvas = document.getElementById('einkFloralCanvas');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.id = 'einkFloralCanvas';
+      canvas.className = 'eink-floral-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      document.body.prepend(canvas);
+    }
+
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, isOver: false };
+    let scrollBoost = 0;
+    let lastScrollY = window.scrollY;
+
+    // Responsive Canvas Resize
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+      buildScene();
+    }
+
+    // Get current theme ink color dynamically
+    function getInkColor() {
+      const computed = getComputedStyle(document.documentElement);
+      let ink = computed.getPropertyValue('--ink').trim() || '#1c1c1a';
+      return ink;
+    }
+
+    let items = [];
+    let particles = [];
+
+    // Build Floral Border & Star Layout (Inspired by reference image)
+    function buildScene() {
+      items = [];
+      particles = [];
+
+      const isMobile = width < 680;
+      const marginOffset = isMobile ? 35 : 75;
+      const flowerScale = isMobile ? 0.75 : 1.0;
+
+      // Left Border Flowers & Leaves
+      const leftCount = isMobile ? 4 : 7;
+      const stepYLeft = height / (leftCount + 1);
+      for (let i = 1; i <= leftCount; i++) {
+        const y = stepYLeft * i + (Math.sin(i * 1.5) * 20);
+        const x = marginOffset + (Math.cos(i * 1.2) * 15);
+        items.push({
+          type: 'flower',
+          side: 'left',
+          x: x,
+          y: y,
+          baseRadius: (i % 2 === 0 ? 32 : 25) * flowerScale,
+          petalCount: i % 2 === 0 ? 12 : 8,
+          rotation: i * 0.4,
+          bloom: 1.0,
+          targetBloom: 1.0,
+          bloomPhase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // Right Border Flowers & Leaves
+      const rightCount = isMobile ? 4 : 7;
+      const stepYRight = height / (rightCount + 1);
+      for (let i = 1; i <= rightCount; i++) {
+        const y = stepYRight * i + (Math.cos(i * 1.5) * 20);
+        const x = width - marginOffset - (Math.sin(i * 1.2) * 15);
+        items.push({
+          type: 'flower',
+          side: 'right',
+          x: x,
+          y: y,
+          baseRadius: (i % 2 === 0 ? 28 : 34) * flowerScale,
+          petalCount: i % 2 === 0 ? 10 : 14,
+          rotation: i * 0.5,
+          bloom: 1.0,
+          targetBloom: 1.0,
+          bloomPhase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // Floating 4-Point Sparkle Stars (Matching user's reference image!)
+      const starPositions = isMobile ? [
+        { x: width * 0.18, y: height * 0.22, size: 18 },
+        { x: width * 0.82, y: height * 0.38, size: 22 },
+        { x: width * 0.15, y: height * 0.75, size: 20 },
+        { x: width * 0.85, y: height * 0.82, size: 16 }
+      ] : [
+        { x: width * 0.14, y: height * 0.25, size: 26 },
+        { x: width * 0.18, y: height * 0.30, size: 16 },
+        { x: width * 0.84, y: height * 0.32, size: 28 },
+        { x: width * 0.88, y: height * 0.38, size: 18 },
+        { x: width * 0.12, y: height * 0.70, size: 24 },
+        { x: width * 0.16, y: height * 0.76, size: 14 },
+        { x: width * 0.86, y: height * 0.78, size: 30 },
+        { x: width * 0.82, y: height * 0.84, size: 16 }
+      ];
+
+      starPositions.forEach((pos, idx) => {
+        items.push({
+          type: 'star',
+          x: pos.x,
+          y: pos.y,
+          size: pos.size * flowerScale,
+          rotation: idx * 0.3,
+          bloom: 1.0,
+          targetBloom: 1.0,
+          phase: Math.random() * Math.PI * 2
+        });
+      });
+
+      // Background floating ambient particles
+      const particleCount = isMobile ? 12 : 25;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.8 + 0.6,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          alpha: Math.random() * 0.4 + 0.2
+        });
+      }
+    }
+
+    // Interactive Listeners: Mouse Move, Touch Move, Scroll
+    window.addEventListener('resize', resize, { passive: true });
+
+    function updatePointer(px, py) {
+      mouse.targetX = px;
+      mouse.targetY = py;
+      mouse.isOver = true;
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      updatePointer(e.clientX, e.clientY);
+    }, { passive: true });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.isOver = false;
+    }, { passive: true });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+      const delta = Math.abs(currentY - lastScrollY);
+      scrollBoost = Math.min(scrollBoost + delta * 0.04, 1.5);
+      lastScrollY = currentY;
+    }, { passive: true });
+
+    // Drawing helper: 4-Point Diamond Sparkle Star (Exact match to image reference)
+    function drawFourPointStar(ctx, cx, cy, size, rotation, opacity, strokeColor) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(rotation);
+      ctx.beginPath();
+      const rOuter = size;
+      const rInner = size * 0.28;
+      for (let i = 0; i < 4; i++) {
+        const outerAngle = (i * Math.PI) / 2;
+        const innerAngle = outerAngle + Math.PI / 4;
+        ctx.lineTo(Math.cos(outerAngle) * rOuter, Math.sin(outerAngle) * rOuter);
+        ctx.lineTo(Math.cos(innerAngle) * rInner, Math.sin(innerAngle) * rInner);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = strokeColor;
+      ctx.globalAlpha = opacity;
+      ctx.lineWidth = 1.3;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Drawing helper: Detailed E-Ink Line Art Flower (Petals + Stipple Center + Ribs)
+    function drawEInkFlower(ctx, cx, cy, radius, petalCount, rotation, bloomFactor, opacity, strokeColor) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(rotation);
+      ctx.globalAlpha = opacity;
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 1.25;
+
+      // Outer petal bloom scaling
+      const pLen = radius * bloomFactor;
+      const innerCore = radius * 0.3 * bloomFactor;
+
+      // Draw Petals
+      for (let i = 0; i < petalCount; i++) {
+        const angle = (i / petalCount) * Math.PI * 2;
+        ctx.save();
+        ctx.rotate(angle);
+        ctx.beginPath();
+        ctx.moveTo(0, innerCore);
+        ctx.bezierCurveTo(
+          -radius * 0.24 * bloomFactor, pLen * 0.55,
+          -radius * 0.16 * bloomFactor, pLen,
+          0, pLen * 1.08
+        );
+        ctx.bezierCurveTo(
+          radius * 0.16 * bloomFactor, pLen,
+          radius * 0.24 * bloomFactor, pLen * 0.55,
+          0, innerCore
+        );
+        ctx.stroke();
+
+        // Petal central leaf vein line
+        ctx.beginPath();
+        ctx.moveTo(0, innerCore * 1.2);
+        ctx.lineTo(0, pLen * 0.85);
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      // Center dual rings & stipple core
+      ctx.lineWidth = 1.25;
+      ctx.beginPath();
+      ctx.arc(0, 0, innerCore, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, innerCore * 0.5, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Drawing helper: Continuous Stem Vine Curve along Left & Right Margins
+    function drawStemVines(strokeColor) {
+      ctx.save();
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 1.2;
+      ctx.globalAlpha = 0.18 + scrollBoost * 0.1;
+
+      // Left Margin Stem Vine
+      const isMobile = width < 680;
+      const leftX = isMobile ? 35 : 75;
+      ctx.beginPath();
+      ctx.moveTo(leftX, 0);
+      for (let y = 0; y <= height; y += 30) {
+        const waveX = leftX + Math.sin(y * 0.015 + Date.now() * 0.001) * 12;
+        ctx.lineTo(waveX, y);
+      }
+      ctx.stroke();
+
+      // Right Margin Stem Vine
+      const rightX = width - (isMobile ? 35 : 75);
+      ctx.beginPath();
+      ctx.moveTo(rightX, 0);
+      for (let y = 0; y <= height; y += 30) {
+        const waveX = rightX + Math.cos(y * 0.015 + Date.now() * 0.001) * 12;
+        ctx.lineTo(waveX, y);
+      }
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Animation Render Loop
+    let time = 0;
+    function render() {
+      time += 0.018;
+
+      // Smooth mouse interpolation
+      mouse.x += (mouse.targetX - mouse.x) * 0.1;
+      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+      // Decay scroll boost smoothly
+      scrollBoost *= 0.94;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const strokeColor = getInkColor();
+
+      // 1. Draw side stem vines
+      drawStemVines(strokeColor);
+
+      // 2. Render & Animate Flowers & Stars
+      items.forEach((item) => {
+        // Compute distance to mouse
+        const dx = mouse.x - item.x;
+        const dy = mouse.y - item.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Hover bloom effect when pointer comes close (< 180px)
+        const proximityThreshold = 180;
+        let hoverBloom = 0;
+        if (mouse.isOver && dist < proximityThreshold) {
+          hoverBloom = (1 - dist / proximityThreshold) * 0.45;
+        }
+
+        // Combine natural breathing + hover bloom + scroll boost
+        const breath = Math.sin(time * 1.5 + (item.bloomPhase || item.phase || 0)) * 0.06;
+        item.targetBloom = 1.0 + breath + hoverBloom + scrollBoost * 0.35;
+        item.bloom += (item.targetBloom - item.bloom) * 0.1;
+
+        const baseAlpha = 0.22 + (hoverBloom * 0.5) + (scrollBoost * 0.15);
+
+        if (item.type === 'flower') {
+          const currentRotation = item.rotation + Math.sin(time * 0.5 + item.y * 0.01) * 0.08;
+          drawEInkFlower(
+            ctx,
+            item.x,
+            item.y,
+            item.baseRadius,
+            item.petalCount,
+            currentRotation,
+            item.bloom,
+            Math.min(baseAlpha, 0.7),
+            strokeColor
+          );
+        } else if (item.type === 'star') {
+          const currentRotation = item.rotation + (time * 0.4) + (hoverBloom * 1.2);
+          drawFourPointStar(
+            ctx,
+            item.x,
+            item.y,
+            item.size * item.bloom,
+            currentRotation,
+            Math.min(baseAlpha + 0.1, 0.75),
+            strokeColor
+          );
+        }
+      });
+
+      // 3. Render Floating Ambient Particles
+      ctx.save();
+      ctx.fillStyle = strokeColor;
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        ctx.globalAlpha = p.alpha * (0.4 + scrollBoost * 0.3);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+
+      requestAnimationFrame(render);
+    }
+
+    // Initialize Canvas & Start Loop
+    resize();
+    render();
+  })();
 });
 

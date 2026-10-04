@@ -1521,6 +1521,7 @@ html {
   border-radius: 10px;
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
+  box-shadow: 2px 2px 0px var(--ink);
 }
 
 .tech-pill:hover {
@@ -1532,18 +1533,10 @@ html {
 .tech-pill-icon {
   width: 16px;
   height: 16px;
-  stroke: var(--ink);
-  flex-shrink: 0;
-}
-  box-shadow: 2px 2px 0px var(--ink);
-}
-
-.tech-pill-icon {
-  width: 14px;
-  height: 14px;
   stroke: currentColor;
   stroke-width: 2;
   fill: none;
+  flex-shrink: 0;
 }
 
 /* 4. One Short Description */
@@ -2237,7 +2230,8 @@ html {
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 2.75rem 0 1.25rem 0; /* Expanded top padding clearance so tooltips are never clipped */
+  padding: 2.75rem 0 1.25rem 0;
+  /* Expanded top padding clearance so tooltips are never clipped */
   box-shadow: none;
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
@@ -2295,7 +2289,8 @@ html {
   color: var(--ink);
   transform: translateY(-4px) scale(1.2);
   box-shadow: none;
-  z-index: 50; /* Elevate hovered item and tooltip above siblings */
+  z-index: 50;
+  /* Elevate hovered item and tooltip above siblings */
 }
 
 /* Tactile E-Ink High-Contrast Tooltip on Icon Hover */
@@ -2940,4 +2935,55 @@ html {
 .piano-space {
   display: inline-block;
   width: 0.45em;
+}
+
+/* ==========================================================================
+   E-Ink Interactive Floral & Sparkle Background Animation Canvas (Zero-Interference)
+   ========================================================================== */
+#einkFloralCanvas,
+.eink-floral-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  touch-action: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+}
+
+/* Ensure all interactive sections, buttons, navigation, and cards maintain full pointer priority & z-index */
+header,
+nav,
+main,
+footer,
+.navbar-container,
+.main-content,
+.footer-container,
+.eink-navbar,
+.eink-footer,
+.hero-section,
+.portfolio-section,
+.cert-card,
+.project-card-item,
+.portfolio-card,
+.eink-card,
+.hero-content,
+.eink-btn,
+.eink-theme-toggle,
+.mobile-toggle,
+.social-icon-btn,
+.nav-link,
+button,
+a,
+input,
+textarea,
+select {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
 }
