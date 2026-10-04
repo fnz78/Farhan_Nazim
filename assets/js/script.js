@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter-tab,
     .project-action-btn,
     .eink-btn,
+    .eink-copy-btn,
     .eink-theme-toggle,
     .nav-brand,
     .footer-brand,
@@ -194,6 +195,93 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = e.target.closest(interactiveElementsSelector);
     if (target) {
       window.triggerSquishyAnimation(target);
+    }
+  });
+
+  // --- Universal E-Ink Copy to Clipboard & Toast Notification Handler ---
+  function showCopyToast(message) {
+    let toast = document.getElementById('einkCopyToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'einkCopyToast';
+      toast.className = 'eink-copy-toast';
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<span class="toast-icon">✓</span> <span>${message}</span>`;
+    toast.classList.remove('show');
+    void toast.offsetWidth;
+    toast.classList.add('show');
+
+    if (window.copyToastTimeout) clearTimeout(window.copyToastTimeout);
+    window.copyToastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2400);
+  }
+
+  document.addEventListener('click', (e) => {
+    const copyBtn = e.target.closest('[data-copy]');
+    if (!copyBtn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const textToCopy = copyBtn.getAttribute('data-copy');
+    const labelToCopy = copyBtn.getAttribute('data-copy-label') || textToCopy;
+    if (!textToCopy) return;
+
+    function handleSuccess() {
+      const copyIcon = copyBtn.querySelector('.copy-icon');
+      const checkIcon = copyBtn.querySelector('.check-icon');
+      const tooltip = copyBtn.querySelector('.copy-tooltip');
+
+      copyBtn.classList.add('copied');
+      if (copyIcon) copyIcon.style.display = 'none';
+      if (checkIcon) checkIcon.style.display = 'inline-block';
+      if (tooltip) {
+        if (!copyBtn.dataset.originalTooltip) {
+          copyBtn.dataset.originalTooltip = tooltip.textContent;
+        }
+        tooltip.textContent = 'COPIED!';
+      }
+
+      showCopyToast(`Copied to clipboard: ${labelToCopy}`);
+
+      if (navigator.vibrate && 'ontouchstart' in window) {
+        try { navigator.vibrate([10, 25]); } catch (err) {}
+      }
+
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        if (copyIcon) copyIcon.style.display = 'inline-block';
+        if (checkIcon) checkIcon.style.display = 'none';
+        if (tooltip && copyBtn.dataset.originalTooltip) {
+          tooltip.textContent = copyBtn.dataset.originalTooltip;
+        }
+      }, 2200);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(textToCopy).then(handleSuccess).catch(err => {
+        fallbackCopy(textToCopy);
+      });
+    } else {
+      fallbackCopy(textToCopy);
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        handleSuccess();
+      } catch (err) {
+        showCopyToast('Failed to copy');
+      }
+      document.body.removeChild(textArea);
     }
   });
 
@@ -660,6 +748,54 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+    });
+  }
+
+  // --- 10. Image Lightbox Modal Handler ---
+  const lightboxModal = document.getElementById('imageLightboxModal');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxCloseBtn = document.querySelector('.lightbox-close-btn');
+  const lightboxBackdrop = document.querySelector('.lightbox-backdrop');
+
+  if (lightboxModal && lightboxImage) {
+    function openLightbox(src, alt, captionText) {
+      lightboxImage.src = src;
+      lightboxImage.alt = alt || 'Enlarged Preview';
+      if (lightboxCaption) {
+        lightboxCaption.textContent = captionText || alt || '';
+      }
+      lightboxModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (!lightboxModal.classList.contains('active')) {
+          lightboxImage.src = '';
+        }
+      }, 250);
+    }
+
+    document.addEventListener('click', (e) => {
+      const targetImg = e.target.closest('.project-ui-img');
+      if (targetImg) {
+        const src = targetImg.getAttribute('src');
+        const alt = targetImg.getAttribute('alt') || 'Project UI Screenshot';
+        const cardTitle = targetImg.closest('.project-card-item')?.querySelector('.project-card-title')?.textContent || alt;
+        openLightbox(src, alt, cardTitle);
+      }
+    });
+
+    if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+    if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+        closeLightbox();
+      }
     });
   }
 });
