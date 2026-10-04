@@ -1,40 +1,60 @@
-# E-Ink Portfolio Experience
+# E-Ink Minimalist Developer Portfolio
 
-A minimalist, high-performance personal portfolio featuring interactive e-ink fluid dynamics, custom paper textures, and responsive design.
+A minimalist, high-performance personal portfolio featuring interactive e-ink floral background animations, custom paper textures, and responsive brutalist typography.
 
 ---
 
 ## ✦ Key Features
 
-- **Interactive Ink Flow Engine**: Real-time 2D HTML5 canvas wave physics animation simulating organic e-ink motion with interactive touch and pointer force feedback.
-- **E-Ink Design System**: Built with modern CSS variables, paper grain texture overlays, tactile shadow effects, and typography featuring **Newsreader**, **Space Grotesk**, and **JetBrains Mono**.
-- **Adaptive Light/Dark Theme**: Smooth transition between light and dark e-ink paper modes with persistent local preferences and system theme detection.
-- **Responsive Floating Navigation**: Sleek floating glassmorphism/paper navbar and footer with mobile menu support.
-- **Contact Integration**: Contact form powered by Formspree with client-side validation and anti-spam protection.
+- **Interactive E-Ink Canvas Engine**: Real-time 2D HTML5 canvas background animation with interactive pointer proximity bloom, scroll surges, and 4-point sparkle stars.
+- **E-Ink Design System**: Built with modern CSS custom variables, tactile paper grain overlays, custom shadows, and typography featuring **Newsreader**, **Space Grotesk**, and **JetBrains Mono**.
+- **Adaptive Light/Dark Theme**: Smooth switching between light and dark e-ink paper modes with persistent local storage preferences.
+- **Unified Floating Navigation & Footer**: Consistent navbar and footer controls across all pages, including GitHub, LinkedIn, Email, and Phone contact channels.
+- **Project Showcase & Fullscreen Lightbox**: Dedicated project gallery with interactive image previews, live demo badges, and tech stack tags.
+- **Formspree Contact Integration**: Production contact form with client-side validation, anti-spam honeypot, and background AJAX transmission.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5**: Semantic markup with structured sections and accessible ARIA attributes.
-- **Vanilla CSS**: Custom design system without heavy frameworks for maximum speed and smooth rendering.
-- **JavaScript (ES6+)**: Zero-GC memory-pooled 2D Canvas animation controller for fluid 60FPS motion.
+- **Core**: HTML5, Vanilla JavaScript (ES6+), HTML5 Canvas 2D API.
+- **Styling**: Modular Vanilla CSS Systems, CSS Custom Variables, Backdrop Filters.
+- **Services**: Formspree (Form handling), GitHub Pages (Hosting).
 
 ---
 
-## 📁 Repository Structure
+## 📁 Repository Directory Structure
 
 ```
-├── assets/
-│   ├── css/
-│   │   └── style.css            # E-Ink design system & custom styling
-│   ├── js/
-│   │   ├── inkflow.js           # Interactive canvas fluid dynamics controller
-│   │   └── script.js            # Navbar, theme toggle, & form validation
-│   └── images/
-│       └── profile-avatar.png   # Profile media assets
-├── index.html                   # Main portfolio landing page
-└── README.md                    # Project documentation
+.
+├── 404.html                   # Custom branded 404 error page
+├── index.html                 # Main portfolio landing page
+├── projects.html              # Software & systems projects archive
+├── education.html             # Academic education timeline
+├── certifications.html        # Licenses & certifications gallery
+├── robots.txt                 # Search engine crawler permissions
+├── sitemap.xml                # SEO XML sitemap
+├── LICENSE                    # MIT open-source license
+├── README.md                  # Project documentation
+├── .env.example               # Environment variable template
+├── .gitignore                 # Git ignore rules
+└── assets/
+    ├── css/
+    │   └── style.css          # E-Ink design system & layout styles
+    ├── js/
+    │   ├── script.js          # Navigation, theme controller, & canvas animation engine
+    │   ├── techstack.js       # Tech stack marquee animation controller
+    │   └── inkflow.js         # Ink flow physics controller
+    ├── images/
+    │   ├── favicon.svg        # Redesigned SVG favicon monogram
+    │   ├── profile-avatar.png # Profile photo asset
+    │   ├── tic-tac-toe.png    # Tic-Tac-Toe Ultimate UI screenshot
+    │   ├── expense-tracker.png# Expense Tracker UI screenshot
+    │   ├── lumina-gallery.png # Lumina Gallery UI screenshot
+    │   ├── butterfly-canvas.png# Butterfly Canvas UI screenshot
+    │   └── bmi-calc-pro.png   # BMI Calculator Pro UI screenshot
+    └── docs/
+        └── README.md          # Downloadable PDF documents directory
 ```
 
 ---
@@ -47,7 +67,12 @@ A minimalist, high-performance personal portfolio featuring interactive e-ink fl
    ```
 
 2. **Run locally:**
-   - Open `index.html` directly in any web browser, or serve it using any HTTP local server (e.g. `npx serve`, Live Server extension, or `python -m http.server`).
+   - Open `index.html` in any web browser, or launch a local HTTP server:
+     ```bash
+     npx serve
+     # or
+     python -m http.server 8000
+     ```
 
 ---
 
