@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: https://fnz78.github.io/sitemap.xml
+Sitemap: https://farhannazim.vercel.app/sitemap.xml
