@@ -14,13 +14,15 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fnz78.github.io/projects.html">
   <meta property="og:title" content="Projects & Repositories | KN Farhan Nazim">
-  <meta property="og:description" content="Software engineering projects, open-source GitHub repositories, AI/ML models, and web applications.">
+  <meta property="og:description"
+    content="Software engineering projects, open-source GitHub repositories, AI/ML models, and web applications.">
   <meta property="og:image" content="https://fnz78.github.io/assets/images/profile-avatar.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Projects & Repositories | KN Farhan Nazim">
-  <meta name="twitter:description" content="Software engineering projects, open-source GitHub repositories, AI/ML models, and web applications.">
+  <meta name="twitter:description"
+    content="Software engineering projects, open-source GitHub repositories, AI/ML models, and web applications.">
   <meta name="twitter:image" content="https://fnz78.github.io/assets/images/profile-avatar.png">
 
   <!-- Security Headers & Content Policy -->
@@ -174,15 +176,16 @@
       <div class="projects-page-grid" id="projectsGrid">
 
         <!-- ===================================================================
-             PROJECT CARD (TEMPLATE READY FOR YOUR NEXT RECENT PROJECT)
+             PROJECT CARD (PIXEL CAM)
              =================================================================== -->
-        <article class="project-card-item" data-project-category="web systems">
+        <article class="project-card-item" data-project-category="web tools apps">
 
           <div class="project-card-header">
-            <span class="project-category-tag">WEB / ANIMATION</span>
+            <span class="project-category-tag">WEB / CREATIVE TOOL</span>
             <div class="project-action-btns">
-              <a href="https://github.com/fnz78" target="_blank" rel="noopener noreferrer" class="project-action-btn"
-                title="View Source Code on GitHub">
+              <!-- GitHub Repo Link -->
+              <a href="https://github.com/fnz78/Pixel_Cam" target="_blank" rel="noopener noreferrer"
+                class="project-action-btn" title="View Source Code on GitHub">
                 <svg class="project-btn-icon" viewBox="0 0 24 24">
                   <path fill="currentColor"
                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -190,8 +193,9 @@
                 <span>GITHUB</span>
               </a>
 
-              <a href="#" target="_blank" rel="noopener noreferrer" class="project-action-btn demo-btn"
-                title="View Live Interactive Demo">
+              <!-- Live Demo Link -->
+              <a href="https://pixel-cam.onrender.com/" target="_blank" rel="noopener noreferrer"
+                class="project-action-btn demo-btn" title="View Live Interactive Demo">
                 <svg class="project-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
@@ -202,25 +206,78 @@
             </div>
           </div>
 
-          <h2 class="project-card-title">E-Ink Fluid Motion Engine</h2>
-          <p class="project-card-oneliner">Interactive canvas-based fluid ink dynamics optimized for monochrome displays
-            and graphics rendering.</p>
+          <h2 class="project-card-title">Pixel Cam</h2>
+          <p class="project-card-oneliner">Convert your photos into retro dot-art and bead-art Polaroid-style images
+            with webcam streaming, AES-256-GCM encrypted card sharing, and multi-threaded Web Worker rendering.</p>
 
+          <!-- Small UI / Screenshot Slot -->
           <div class="project-ui-slot">
-            <div class="project-ui-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-              <span>UI SCREENSHOT PREVIEW</span>
-            </div>
+            <img src="assets/images/pixel-cam.png" alt="Pixel Cam UI Screenshot" class="project-ui-img" loading="lazy"
+              decoding="async" title="Click to view enlarged screenshot">
           </div>
 
           <div class="project-tech-tags">
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">HTML5 Canvas</span>
-            <span class="tech-tag">CSS Systems</span>
+            <span class="tech-tag">JavaScript (ES6+)</span>
+            <span class="tech-tag">Node.js & Express</span>
+            <span class="tech-tag">HTML5 Canvas API</span>
+            <span class="tech-tag">Web Workers</span>
+            <span class="tech-tag">AES-256-GCM Encryption</span>
+            <span class="tech-tag">PWA / Service Worker</span>
+            <span class="tech-tag">CIE76 DeltaE Color Math</span>
+          </div>
+        </article>
+
+
+        <!-- ===================================================================
+             PROJECT CARD (STENCIL STUDIO)
+             =================================================================== -->
+        <article class="project-card-item" data-project-category="web tools apps">
+
+          <div class="project-card-header">
+            <span class="project-category-tag">WEB / GRAPHICS APP</span>
+            <div class="project-action-btns">
+              <!-- GitHub Repo Link -->
+              <a href="https://github.com/fnz78/Stencil_studio" target="_blank" rel="noopener noreferrer"
+                class="project-action-btn" title="View Source Code on GitHub">
+                <svg class="project-btn-icon" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span>GITHUB</span>
+              </a>
+
+              <!-- Live Demo Link -->
+              <a href="https://stencil-studio.vercel.app/" target="_blank" rel="noopener noreferrer"
+                class="project-action-btn demo-btn" title="View Live Interactive Demo">
+                <svg class="project-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
+                <span>LIVE DEMO</span>
+              </a>
+            </div>
+          </div>
+
+          <h2 class="project-card-title">Stencil Studio</h2>
+          <p class="project-card-oneliner">A premium client-side web application designed to convert any photo into
+            clean, high-contrast tracing stencils, vector outlines, Sobel/Laplacian halftone filters, and batch print
+            slicing.</p>
+
+          <!-- Small UI / Screenshot Slot -->
+          <div class="project-ui-slot">
+            <img src="assets/images/stencil-studio.png" alt="Stencil Studio UI Screenshot" class="project-ui-img"
+              loading="lazy" decoding="async" title="Click to view enlarged screenshot">
+          </div>
+
+          <div class="project-tech-tags">
+            <span class="tech-tag">Modular JavaScript</span>
+            <span class="tech-tag">Sobel & Laplacian Filters</span>
+            <span class="tech-tag">SVG Vector Tracing</span>
+            <span class="tech-tag">Halftone Engine</span>
+            <span class="tech-tag">IndexedDB API</span>
+            <span class="tech-tag">Batch Queue Processor</span>
+            <span class="tech-tag">CSS3 Design System</span>
           </div>
         </article>
 
