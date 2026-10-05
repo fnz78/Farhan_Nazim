@@ -572,9 +572,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cleanFormData.append('message', messageVal);
       cleanFormData.append('_subject', 'Portfolio Contact Message from ' + nameVal);
 
+      // Securely construct Formspree Endpoint at runtime (Obfuscated from automated HTML scrapers)
+      const _fsEnc = 'aHR0cHM6Ly9mb3Jtc3ByZWUuaW8vZi9tZGVrYnZqag==';
       const formEndpoint = (typeof window !== 'undefined' && window.ENV && window.ENV.FORMSPREE_ENDPOINT)
-        || contactForm.getAttribute('action')
-        || 'https://formspree.io/f/mdekbvjj';
+        || atob(_fsEnc);
 
       try {
         const response = await fetch(formEndpoint, {
@@ -636,6 +637,86 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
+  }
+
+  // --- Contact Detail Items: Reveal Masked Info & Click-to-Copy Handler ---
+  const contactDetailsList = document.querySelector('.contact-details-list');
+  if (contactDetailsList) {
+    contactDetailsList.addEventListener('click', (e) => {
+      const item = e.target.closest('.contact-detail-item');
+      if (!item) return;
+
+      const revealBtn = e.target.closest('.detail-reveal-pill, .detail-reveal-btn');
+      const copyBtn = e.target.closest('.detail-copy-btn');
+      const copyVal = item.getAttribute('data-copy');
+      const fullVal = item.getAttribute('data-full');
+      const maskedVal = item.getAttribute('data-masked');
+      const valSpan = item.querySelector('.detail-val');
+      const eyeIcon = item.querySelector('.icon-eye');
+      const eyeOffIcon = item.querySelector('.icon-eye-off');
+      const pillText = item.querySelector('.pill-text');
+
+      // 1. Toggle Reveal / Mask
+      if (revealBtn || (!copyBtn && item.classList.contains('contact-reveal-item') && !item.classList.contains('is-revealed'))) {
+        const isCurrentlyRevealed = item.classList.contains('is-revealed');
+
+        if (isCurrentlyRevealed && revealBtn) {
+          // Mask back
+          item.classList.remove('is-revealed');
+          if (valSpan && maskedVal) valSpan.textContent = maskedVal;
+          if (eyeIcon) eyeIcon.style.display = 'block';
+          if (eyeOffIcon) eyeOffIcon.style.display = 'none';
+          if (pillText) pillText.textContent = 'REVEAL';
+          if (revealBtn) {
+            revealBtn.classList.remove('is-active');
+            revealBtn.setAttribute('title', 'Click to Reveal Info');
+          }
+        } else if (fullVal) {
+          // Reveal full value
+          item.classList.add('is-revealed');
+          if (valSpan) valSpan.textContent = fullVal;
+          if (eyeIcon) eyeIcon.style.display = 'none';
+          if (eyeOffIcon) eyeOffIcon.style.display = 'block';
+          if (pillText) pillText.textContent = 'HIDE';
+          if (revealBtn) {
+            revealBtn.classList.add('is-active');
+            revealBtn.setAttribute('title', 'Click to Hide Info');
+          }
+          if (typeof window.triggerEInkFlash === 'function') {
+            window.triggerEInkFlash();
+          }
+        }
+        if (revealBtn) return;
+      }
+
+      // 2. Click to Copy
+      if (copyBtn || copyVal) {
+        const targetCopyBtn = copyBtn || item.querySelector('.detail-copy-btn');
+        if (copyVal) {
+          navigator.clipboard.writeText(copyVal).then(() => {
+            if (targetCopyBtn) {
+              targetCopyBtn.classList.add('copied');
+              setTimeout(() => targetCopyBtn.classList.remove('copied'), 1800);
+            }
+            if (navigator.vibrate && 'ontouchstart' in window) {
+              try { navigator.vibrate([8, 16]); } catch (err) {}
+            }
+          }).catch(err => {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = copyVal;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            if (targetCopyBtn) {
+              targetCopyBtn.classList.add('copied');
+              setTimeout(() => targetCopyBtn.classList.remove('copied'), 1800);
+            }
+          });
+        }
+      }
+    });
   }
 
   // --- XSS Security Sanitization Utility ---

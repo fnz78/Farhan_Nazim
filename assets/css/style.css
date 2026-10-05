@@ -215,13 +215,24 @@ body:not(.flash) .eink-footer {
   letter-spacing: -0.02em;
   padding: 0.25rem 0.55rem;
   border-radius: 9999px;
-  border: 1px solid transparent;
-  transition: border-color 0.2s steps(2), transform 0.35s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  border: 1.5px solid transparent;
+  transition: color 0.2s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.35s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   will-change: transform;
 }
 
-.nav-brand:hover {
+.nav-brand:hover,
+.nav-brand:focus-visible,
+.nav-brand:active {
   border-color: var(--ink-border);
+  background-color: var(--paper-card);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme="dark"] .nav-brand:hover,
+:root[data-theme="dark"] .nav-brand:focus-visible,
+:root[data-theme="dark"] .nav-brand:active {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
 }
 
 .brand-dot {
@@ -276,24 +287,41 @@ body:not(.flash) .eink-footer {
   font-weight: 500;
   padding: 0.4rem 0.7rem;
   border-radius: 9999px;
-  transition: color 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.35s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  border: 1.5px solid transparent;
+  transition: color 0.2s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.35s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   will-change: transform;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link:active {
   color: var(--ink);
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--paper-card);
+  border-color: var(--ink-border);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-:root[data-theme="dark"] .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+:root[data-theme="dark"] .nav-link:hover,
+:root[data-theme="dark"] .nav-link:focus-visible,
+:root[data-theme="dark"] .nav-link:active {
+  background-color: var(--paper-card);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.nav-link:active {
+  transform: translateY(1px) scale(0.95);
+  box-shadow: none;
 }
 
 .nav-link.active {
   color: var(--ink);
   font-weight: 700;
   background-color: var(--paper-card);
-  border: 1px solid var(--ink-border);
+  border: 1.5px solid var(--ink-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .nav-link.squishy-active,
@@ -1201,30 +1229,178 @@ body:not(.flash) .eink-footer {
   text-overflow: ellipsis;
 }
 
-.detail-copy-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  border: 1px solid var(--ink-border);
-  background: var(--paper-translucent);
+.detail-action-btns {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.45rem;
   flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-.contact-detail-item:hover .detail-copy-icon {
-  opacity: 1;
+.detail-reveal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 20px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper-card);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  box-shadow: 2px 2px 0px var(--ink-border);
+  user-select: none;
+}
+
+.detail-reveal-pill:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-1px);
+  box-shadow: 2.5px 2.5px 0px var(--ink);
+}
+
+.detail-reveal-pill:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.detail-reveal-pill svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.detail-reveal-pill.is-active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* E-Ink Education Status Badges (Graduated / Completed - No Arrears) */
+.cert-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper-card);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  user-select: none;
+  box-shadow: 1.5px 1.5px 0px var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.cert-status-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 2.5px 2.5px 0px var(--ink);
   background: var(--ink);
   color: var(--paper);
 }
 
-.detail-copy-icon svg {
-  width: 13px;
-  height: 13px;
+.cert-status-badge svg {
+  width: 12px;
+  height: 12px;
   stroke: currentColor;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+}
+
+.status-pill-tag {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  border: 1.5px solid var(--ink) !important;
+}
+
+.detail-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1.5px solid var(--ink-border);
+  background: var(--paper-translucent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.75;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  position: relative;
+  outline: none;
+}
+
+.contact-detail-item:hover .detail-action-btn {
+  opacity: 1;
+  border-color: var(--ink);
+}
+
+.detail-action-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: scale(1.08);
+}
+
+.detail-action-btn:active {
+  transform: scale(0.95);
+}
+
+.detail-action-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  pointer-events: none;
+}
+
+.detail-action-btn.copied {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  border-color: var(--ink) !important;
+}
+
+.detail-action-btn.copied::after {
+  content: 'COPIED!';
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: copyTooltipPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes copyTooltipPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 4px) scale(0.85);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
 }
 
 .contact-social-row {
