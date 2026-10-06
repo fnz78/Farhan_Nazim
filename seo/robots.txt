@@ -3,4 +3,5 @@ User-agent: *
 Allow: /
 
 # Sitemap Location
+Sitemap: https://farhannazim.vercel.app/seo/sitemap.xml
 Sitemap: https://farhannazim.vercel.app/sitemap.xml
