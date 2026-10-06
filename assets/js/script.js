@@ -43,7 +43,7 @@ window.triggerEInkFlash = function () {
 
   // Haptic feedback vibration for mobile devices
   if (navigator.vibrate && 'ontouchstart' in window) {
-    try { navigator.vibrate([6, 18, 6]); } catch (e) {}
+    try { navigator.vibrate([6, 18, 6]); } catch (e) { }
   }
 
   setTimeout(() => {
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showCopyToast(`Copied to clipboard: ${labelToCopy}`);
 
       if (navigator.vibrate && 'ontouchstart' in window) {
-        try { navigator.vibrate([10, 25]); } catch (err) {}
+        try { navigator.vibrate([10, 25]); } catch (err) { }
       }
 
       setTimeout(() => {
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('touchstart', (e) => {
     const target = e.target.closest(interactiveElementsSelector);
     if (target && navigator.vibrate && 'ontouchstart' in window) {
-      try { navigator.vibrate(6); } catch (err) {}
+      try { navigator.vibrate(6); } catch (err) { }
     }
   }, { passive: true });
 
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
           lastActiveSection = sectionId;
           // Touch haptic feedback vibration for section transition on mobile
           if (navigator.vibrate && 'ontouchstart' in window) {
-            try { navigator.vibrate(6); } catch (e) {}
+            try { navigator.vibrate(6); } catch (e) { }
           }
         }
       }
@@ -706,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => targetCopyBtn.classList.remove('copied'), 1800);
             }
             if (navigator.vibrate && 'ontouchstart' in window) {
-              try { navigator.vibrate([8, 16]); } catch (err) {}
+              try { navigator.vibrate([8, 16]); } catch (err) { }
             }
           }).catch(err => {
             // Fallback for older browsers
@@ -794,7 +794,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Haptic vibration feedback for touch devices
       if (navigator.vibrate && 'ontouchstart' in window) {
-        try { navigator.vibrate(6); } catch (e) {}
+        try { navigator.vibrate(6); } catch (e) { }
       }
     }
 
