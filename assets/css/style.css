@@ -1673,51 +1673,27 @@ html {
 /* 3. Professional Identity */
 .hero-identity-container {
   margin-bottom: 1.25rem;
+  width: 100%;
 }
 
 .hero-identity {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-mono);
+  gap: 0.65rem 0.75rem;
   flex-wrap: wrap;
 }
 
-.identity-badge {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--paper);
-  background: var(--ink);
-  padding: 0.45rem 0.85rem;
-  border-radius: 8px;
-  letter-spacing: 0.02em;
-  box-shadow: 2px 2px 0px var(--paper-card);
-  display: inline-flex;
-  align-items: center;
-}
+@media (max-width: 580px) {
+  .hero-identity {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    width: 100%;
+  }
 
-.identity-role {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink);
-  background: var(--paper-translucent);
-  border: 1.5px solid var(--ink-border);
-  padding: 0.4rem 0.85rem;
-  border-radius: 8px;
-  letter-spacing: 0.02em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  box-shadow: 2px 2px 0px var(--paper-card);
-}
-
-.identity-role::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background-color: var(--ink);
-  border-radius: 50%;
-  display: inline-block;
+  .hero-identity .tech-pill {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1725,10 +1701,9 @@ html {
     gap: 0.5rem;
   }
 
-  .identity-badge,
-  .identity-role {
+  .hero-identity .tech-pill {
     font-size: 0.76rem;
-    padding: 0.35rem 0.65rem;
+    padding: 0.4rem 0.75rem;
   }
 }
 
