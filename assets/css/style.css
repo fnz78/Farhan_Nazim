@@ -1720,6 +1720,18 @@ html {
   display: inline-block;
 }
 
+@media (max-width: 480px) {
+  .hero-identity {
+    gap: 0.5rem;
+  }
+
+  .identity-badge,
+  .identity-role {
+    font-size: 0.76rem;
+    padding: 0.35rem 0.65rem;
+  }
+}
+
 /* Technical Stack Pills (2x2 Grid Layout) */
 .hero-tech-row {
   display: grid;
